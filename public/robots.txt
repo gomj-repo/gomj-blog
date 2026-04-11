@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gomj.dev/sitemap.xml

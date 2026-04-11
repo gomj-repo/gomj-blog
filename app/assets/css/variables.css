@@ -1,0 +1,104 @@
+:root {
+  /* Colors - Confluence-inspired palette */
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f4f5f7;
+  --color-bg-sidebar: #fafbfc;
+  --color-bg-hover: #ebecf0;
+  --color-bg-active: #e2e4e9;
+  --color-bg-overlay: rgba(9, 30, 66, 0.54);
+
+  --color-text: #172b4d;
+  --color-text-secondary: #5e6c84;
+  --color-text-subtle: #7a869a;
+  --color-text-inverse: #ffffff;
+
+  --color-primary: #0052cc;
+  --color-primary-hover: #0065ff;
+  --color-primary-light: #deebff;
+
+  --color-border: #dfe1e6;
+  --color-border-light: #ebecf0;
+
+  --color-success: #00875a;
+  --color-warning: #ff991f;
+  --color-danger: #de350b;
+  --color-success-bg: #e3fcef;
+  --color-warning-bg: #fffae6;
+
+  /* Typography */
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  /* Layout */
+  --sidebar-width: 280px;
+  --header-height: 56px;
+  --content-max-width: 960px;
+
+  /* Borders */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(9, 30, 66, 0.08);
+  --shadow-md: 0 4px 8px rgba(9, 30, 66, 0.1);
+  --shadow-lg: 0 8px 16px rgba(9, 30, 66, 0.15);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+}
+
+/* Dark Mode Theme */
+[data-theme="dark"] {
+  --color-bg: #1a1a2e;
+  --color-bg-secondary: #16213e;
+  --color-bg-sidebar: #0f1626;
+  --color-bg-hover: #1f2b47;
+  --color-bg-active: #263350;
+  --color-bg-overlay: rgba(0, 0, 0, 0.7);
+
+  --color-text: #e0e0e0;
+  --color-text-secondary: #a0aec0;
+  --color-text-subtle: #718096;
+  --color-text-inverse: #1a1a2e;
+
+  --color-primary: #63b3ed;
+  --color-primary-hover: #90cdf4;
+  --color-primary-light: #1a365d;
+
+  --color-border: #2d3748;
+  --color-border-light: #1f2b47;
+
+  --color-success: #48bb78;
+  --color-warning: #ecc94b;
+  --color-danger: #fc8181;
+
+  --color-success-bg: #1a4731;
+  --color-warning-bg: #4a3f1f;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+}

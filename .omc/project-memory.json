@@ -1,0 +1,309 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1775899388220,
+  "projectRoot": "/Users/kmj/WebstormProjects/gomj-blog",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "nuxt",
+        "version": "4.4.2",
+        "category": "fullstack"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": "npm run dev",
+    "scripts": {
+      "build": "nuxt build",
+      "dev": "nuxt dev",
+      "generate": "nuxt generate",
+      "preview": "nuxt preview"
+    }
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "app",
+      "public"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "app": {
+      "path": "app",
+      "purpose": "Application code",
+      "fileCount": 2,
+      "lastAccessed": 1775899388210,
+      "keyFiles": [
+        "app.vue",
+        "error.vue"
+      ]
+    },
+    "content": {
+      "path": "content",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1775899388210,
+      "keyFiles": []
+    },
+    "public": {
+      "path": "public",
+      "purpose": "Public files",
+      "fileCount": 2,
+      "lastAccessed": 1775899388214,
+      "keyFiles": [
+        "favicon.ico",
+        "robots.txt"
+      ]
+    },
+    "app/assets": {
+      "path": "app/assets",
+      "purpose": "Static assets",
+      "fileCount": 0,
+      "lastAccessed": 1775899388215,
+      "keyFiles": []
+    },
+    "app/components": {
+      "path": "app/components",
+      "purpose": "UI components",
+      "fileCount": 0,
+      "lastAccessed": 1775899388215,
+      "keyFiles": []
+    },
+    "app/pages": {
+      "path": "app/pages",
+      "purpose": "Page components",
+      "fileCount": 1,
+      "lastAccessed": 1775899388215,
+      "keyFiles": [
+        "index.vue"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "CLAUDE.md",
+      "accessCount": 5,
+      "lastAccessed": 1775900320422,
+      "type": "file"
+    },
+    {
+      "path": ".claude/skills/blog-architecture/SKILL.md",
+      "accessCount": 3,
+      "lastAccessed": 1775900343100,
+      "type": "file"
+    },
+    {
+      "path": "nuxt.config.ts",
+      "accessCount": 2,
+      "lastAccessed": 1775900269433,
+      "type": "file"
+    },
+    {
+      "path": ".claude/skills/blog-components/SKILL.md",
+      "accessCount": 2,
+      "lastAccessed": 1775900365969,
+      "type": "file"
+    },
+    {
+      "path": "package.json",
+      "accessCount": 1,
+      "lastAccessed": 1775899488510,
+      "type": "file"
+    },
+    {
+      "path": "app/app.vue",
+      "accessCount": 1,
+      "lastAccessed": 1775899538489,
+      "type": "file"
+    },
+    {
+      "path": "app/pages/index.vue",
+      "accessCount": 1,
+      "lastAccessed": 1775899564689,
+      "type": "file"
+    },
+    {
+      "path": "app/pages/[board]/index.vue",
+      "accessCount": 1,
+      "lastAccessed": 1775899565205,
+      "type": "file"
+    },
+    {
+      "path": "app/pages/[board]/[...slug].vue",
+      "accessCount": 1,
+      "lastAccessed": 1775899565582,
+      "type": "file"
+    },
+    {
+      "path": "app/layouts/default.vue",
+      "accessCount": 1,
+      "lastAccessed": 1775899566068,
+      "type": "file"
+    },
+    {
+      "path": "app/assets/css/variables.css",
+      "accessCount": 1,
+      "lastAccessed": 1775899566533,
+      "type": "file"
+    },
+    {
+      "path": "content.config.ts",
+      "accessCount": 1,
+      "lastAccessed": 1775899566908,
+      "type": "file"
+    },
+    {
+      "path": ".claude/settings.local.json",
+      "accessCount": 1,
+      "lastAccessed": 1775899701186,
+      "type": "file"
+    },
+    {
+      "path": ".claude/settings.json",
+      "accessCount": 1,
+      "lastAccessed": 1775899774162,
+      "type": "file"
+    },
+    {
+      "path": ".claude/commands/lean.md",
+      "accessCount": 1,
+      "lastAccessed": 1775899820880,
+      "type": "file"
+    },
+    {
+      "path": "app/components/base/BaseBadge.vue",
+      "accessCount": 1,
+      "lastAccessed": 1775900152950,
+      "type": "file"
+    },
+    {
+      "path": "app/components/base/BaseCard.vue",
+      "accessCount": 1,
+      "lastAccessed": 1775900153430,
+      "type": "file"
+    },
+    {
+      "path": "app/components/base/BaseList.vue",
+      "accessCount": 1,
+      "lastAccessed": 1775900153920,
+      "type": "file"
+    },
+    {
+      "path": "app/components/content/ArticleCard.vue",
+      "accessCount": 1,
+      "lastAccessed": 1775900154263,
+      "type": "file"
+    },
+    {
+      "path": "app/components/content/ArticleList.vue",
+      "accessCount": 1,
+      "lastAccessed": 1775900154713,
+      "type": "file"
+    },
+    {
+      "path": "app/components/content/ArticleMeta.vue",
+      "accessCount": 1,
+      "lastAccessed": 1775900155109,
+      "type": "file"
+    },
+    {
+      "path": "app/components/content/ProsePre.vue",
+      "accessCount": 1,
+      "lastAccessed": 1775900159657,
+      "type": "file"
+    },
+    {
+      "path": "app/components/content/ReadingProgress.vue",
+      "accessCount": 1,
+      "lastAccessed": 1775900160133,
+      "type": "file"
+    },
+    {
+      "path": "app/components/content/TableOfContents.vue",
+      "accessCount": 1,
+      "lastAccessed": 1775900160605,
+      "type": "file"
+    },
+    {
+      "path": "app/components/layout/AppHeader.vue",
+      "accessCount": 1,
+      "lastAccessed": 1775900161559,
+      "type": "file"
+    },
+    {
+      "path": "app/components/layout/AppSidebar.vue",
+      "accessCount": 1,
+      "lastAccessed": 1775900162111,
+      "type": "file"
+    },
+    {
+      "path": "app/components/layout/AppFooter.vue",
+      "accessCount": 1,
+      "lastAccessed": 1775900162162,
+      "type": "file"
+    },
+    {
+      "path": "app/components/layout/AppBreadcrumb.vue",
+      "accessCount": 1,
+      "lastAccessed": 1775900168470,
+      "type": "file"
+    },
+    {
+      "path": "app/components/layout/BackToTop.vue",
+      "accessCount": 1,
+      "lastAccessed": 1775900168709,
+      "type": "file"
+    },
+    {
+      "path": "app/components/layout/DarkModeToggle.vue",
+      "accessCount": 1,
+      "lastAccessed": 1775900169177,
+      "type": "file"
+    },
+    {
+      "path": "app/components/layout/SearchDialog.vue",
+      "accessCount": 1,
+      "lastAccessed": 1775900169681,
+      "type": "file"
+    },
+    {
+      "path": "app/assets/css/components.css",
+      "accessCount": 1,
+      "lastAccessed": 1775900170826,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}
