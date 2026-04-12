@@ -178,8 +178,8 @@
     },
     {
       "path": "app/components/templates/SidebarPanel.vue",
-      "accessCount": 28,
-      "lastAccessed": 1775996142310,
+      "accessCount": 30,
+      "lastAccessed": 1775996607565,
       "type": "file"
     },
     {
@@ -237,6 +237,12 @@
       "type": "file"
     },
     {
+      "path": "app/pages/[slug].vue",
+      "accessCount": 7,
+      "lastAccessed": 1775996616949,
+      "type": "file"
+    },
+    {
       "path": "nuxt.config.ts",
       "accessCount": 6,
       "lastAccessed": 1775989797562,
@@ -258,12 +264,6 @@
       "path": "app/assets/css/components/molecules/SidebarSearchInput.css",
       "accessCount": 5,
       "lastAccessed": 1775994277765,
-      "type": "file"
-    },
-    {
-      "path": "app/pages/[slug].vue",
-      "accessCount": 5,
-      "lastAccessed": 1775996191457,
       "type": "file"
     },
     {
@@ -357,6 +357,18 @@
       "type": "directory"
     },
     {
+      "path": "app/composables/sideeffect/usePageApi.ts",
+      "accessCount": 2,
+      "lastAccessed": 1775996535020,
+      "type": "file"
+    },
+    {
+      "path": "app/composables/sideeffect/useFolderApi.ts",
+      "accessCount": 2,
+      "lastAccessed": 1775996549752,
+      "type": "file"
+    },
+    {
       "path": "package.json",
       "accessCount": 1,
       "lastAccessed": 1775987088504,
@@ -390,18 +402,6 @@
       "path": "shared/types/user.ts",
       "accessCount": 1,
       "lastAccessed": 1775987200917,
-      "type": "file"
-    },
-    {
-      "path": "app/composables/sideeffect/useFolderApi.ts",
-      "accessCount": 1,
-      "lastAccessed": 1775989405630,
-      "type": "file"
-    },
-    {
-      "path": "app/composables/sideeffect/usePageApi.ts",
-      "accessCount": 1,
-      "lastAccessed": 1775989405879,
       "type": "file"
     },
     {
@@ -445,6 +445,30 @@
       "accessCount": 1,
       "lastAccessed": 1775991453033,
       "type": "directory"
+    },
+    {
+      "path": "server/repositories/page.repository.ts",
+      "accessCount": 1,
+      "lastAccessed": 1775996533266,
+      "type": "file"
+    },
+    {
+      "path": "server/repositories/page.repository.memory.ts",
+      "accessCount": 1,
+      "lastAccessed": 1775996533921,
+      "type": "file"
+    },
+    {
+      "path": "server/api/pages/index.post.ts",
+      "accessCount": 1,
+      "lastAccessed": 1775996548413,
+      "type": "file"
+    },
+    {
+      "path": "server/api/pages/[id].patch.ts",
+      "accessCount": 1,
+      "lastAccessed": 1775996548793,
+      "type": "file"
     }
   ],
   "userDirectives": []

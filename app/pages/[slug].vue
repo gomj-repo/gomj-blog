@@ -10,6 +10,7 @@ import Placeholder from '@tiptap/extension-placeholder'
 const route = useRoute()
 const slug = computed(() => route.params.slug as string)
 
+const pageApi = usePageApi()
 const { allPages, setAllPages, setCurrentPage } = usePageStore()
 
 const page = computed(() => allPages.value.find(p => p.slug === slug.value) ?? null)
@@ -33,17 +34,14 @@ const startEditTitle = () => {
   })
 }
 
-const confirmTitle = () => {
+const confirmTitle = async () => {
   if (!isEditingTitle.value || !page.value) return
   const trimmed = editTitle.value.trim()
-  if (trimmed && trimmed !== page.value.title) {
-    setAllPages(allPages.value.map(p =>
-      p.id === page.value!.id
-        ? { ...p, title: trimmed, updatedAt: new Date().toISOString() }
-        : p
-    ))
-  }
   isEditingTitle.value = false
+  if (trimmed && trimmed !== page.value.title) {
+    const updated = await pageApi.updatePage(page.value.id, { title: trimmed })
+    setAllPages(allPages.value.map(p => p.id === updated.id ? updated : p))
+  }
 }
 
 const onTitleEnter = (e: KeyboardEvent) => {
@@ -56,18 +54,18 @@ const cancelTitle = () => {
   isEditingTitle.value = false
 }
 
-// Auto-save with debounce
+// Auto-save with debounce - persists to server API
 let saveTimer: ReturnType<typeof setTimeout> | null = null
 
-const saveContent = () => {
+const saveContent = async () => {
   if (!editor.value || !page.value) return
   const json = editor.value.getJSON()
   const text = editor.value.getText()
-  setAllPages(allPages.value.map(p =>
-    p.id === page.value!.id
-      ? { ...p, content: json, plainText: text, updatedAt: new Date().toISOString() }
-      : p
-  ))
+  const updated = await pageApi.updatePage(page.value.id, {
+    content: json,
+    plainText: text
+  })
+  setAllPages(allPages.value.map(p => p.id === updated.id ? updated : p))
 }
 
 const debouncedSave = () => {

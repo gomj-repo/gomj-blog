@@ -35,6 +35,8 @@
 </template>
 
 <script setup lang="ts">
+import type { AddNodeType } from '~/components/mocules/SidebarSearchInput.vue'
+
 defineProps<{
   title?: string
 }>()
@@ -53,53 +55,45 @@ const handleNavigate = (slug: string) => {
   router.push(`/${slug}`)
 }
 
-import type { AddNodeType } from '~/components/mocules/SidebarSearchInput.vue'
-import type { SavedPage } from '#shared/types/page'
-
-const { folders, setFolders } = useFolderStore()
+const folderApi = useFolderApi()
+const pageApi = usePageApi()
+const { folders } = useFolderStore()
 const { allPages, setAllPages } = usePageStore()
 
-const handleAddNode = (parentId: string | null, type: AddNodeType) => {
+const handleAddNode = async (parentId: string | null, type: AddNodeType) => {
   if (type === 'folder') {
-    const newFolder: import('#shared/types/folder').SavedFolder = {
-      id: crypto.randomUUID(),
+    await folderApi.createFolder({
       name: '새 폴더',
       slug: `new-folder-${Date.now()}`,
-      parentId,
-      sortOrder: folders.value.length,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    }
-    setFolders([...folders.value, newFolder])
+      parentId: parentId ?? null,
+      sortOrder: folders.value.length
+    })
   } else {
     const folderId = parentId ?? folders.value[0]?.id ?? ''
-    const newPage: SavedPage = {
-      id: crypto.randomUUID(),
+    const page = await pageApi.createPage({
       folderId,
       parentPageId: null,
       title: '새 페이지',
       slug: `new-page-${Date.now()}`,
       content: null,
-      plainText: null,
-      isPublic: false,
-      sortOrder: allPages.value.length,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    }
-    setAllPages([...allPages.value, newPage])
-    router.push('/' + newPage.slug)
+      isPublic: true,
+      sortOrder: allPages.value.length
+    })
+    await pageApi.fetchAllPages()
+    router.push('/' + page.slug)
   }
 }
 
-const handleRenameNode = (id: string, name: string) => {
+const handleRenameNode = async (id: string, name: string) => {
   const folder = folders.value.find(f => f.id === id)
   if (folder) {
-    setFolders(folders.value.map(f => f.id === id ? { ...f, name, updatedAt: new Date().toISOString() } : f))
+    await folderApi.updateFolder(id, { name })
     return
   }
   const page = allPages.value.find(p => p.id === id)
   if (page) {
-    setAllPages(allPages.value.map(p => p.id === id ? { ...p, title: name, updatedAt: new Date().toISOString() } : p))
+    const updated = await pageApi.updatePage(id, { title: name })
+    setAllPages(allPages.value.map(p => p.id === id ? updated : p))
   }
 }
 
