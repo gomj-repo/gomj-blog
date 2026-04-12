@@ -113,9 +113,105 @@
   },
   "hotPaths": [
     {
+      "path": "app/layouts/default.vue",
+      "accessCount": 59,
+      "lastAccessed": 1775982954247,
+      "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 33,
+      "lastAccessed": 1775964606875,
+      "type": "directory"
+    },
+    {
+      "path": "app/pages/index.vue",
+      "accessCount": 25,
+      "lastAccessed": 1775982968659,
+      "type": "file"
+    },
+    {
+      "path": "nuxt.config.ts",
+      "accessCount": 22,
+      "lastAccessed": 1775983171316,
+      "type": "file"
+    },
+    {
+      "path": "package.json",
+      "accessCount": 12,
+      "lastAccessed": 1775962917955,
+      "type": "file"
+    },
+    {
+      "path": "shared/types/page.ts",
+      "accessCount": 11,
+      "lastAccessed": 1775924943334,
+      "type": "file"
+    },
+    {
+      "path": "app/app.vue",
+      "accessCount": 11,
+      "lastAccessed": 1775962675599,
+      "type": "file"
+    },
+    {
+      "path": "server/utils/session.ts",
+      "accessCount": 9,
+      "lastAccessed": 1775918252256,
+      "type": "file"
+    },
+    {
       "path": "CLAUDE.md",
+      "accessCount": 9,
+      "lastAccessed": 1775924743473,
+      "type": "file"
+    },
+    {
+      "path": "server/utils/db.ts",
+      "accessCount": 9,
+      "lastAccessed": 1775924771392,
+      "type": "file"
+    },
+    {
+      "path": "server/utils/auth.ts",
+      "accessCount": 7,
+      "lastAccessed": 1775918226319,
+      "type": "file"
+    },
+    {
+      "path": "shared/types/folder.ts",
+      "accessCount": 7,
+      "lastAccessed": 1775923671029,
+      "type": "file"
+    },
+    {
+      "path": "server/database/schema/index.ts",
+      "accessCount": 6,
+      "lastAccessed": 1775918196441,
+      "type": "file"
+    },
+    {
+      "path": "server/database/schema/pages.ts",
+      "accessCount": 6,
+      "lastAccessed": 1775924973304,
+      "type": "file"
+    },
+    {
+      "path": "server/database/schema/tags.ts",
       "accessCount": 5,
-      "lastAccessed": 1775900320422,
+      "lastAccessed": 1775918155124,
+      "type": "file"
+    },
+    {
+      "path": "server/database/schema/folders.ts",
+      "accessCount": 4,
+      "lastAccessed": 1775918120566,
+      "type": "file"
+    },
+    {
+      "path": "server/api/auth/[...all].ts",
+      "accessCount": 4,
+      "lastAccessed": 1775918956367,
       "type": "file"
     },
     {
@@ -125,9 +221,27 @@
       "type": "file"
     },
     {
-      "path": "nuxt.config.ts",
-      "accessCount": 2,
-      "lastAccessed": 1775900269433,
+      "path": ".env.example",
+      "accessCount": 3,
+      "lastAccessed": 1775917191741,
+      "type": "file"
+    },
+    {
+      "path": "server/database/schema/users.ts",
+      "accessCount": 3,
+      "lastAccessed": 1775918186377,
+      "type": "file"
+    },
+    {
+      "path": "server/database/seed.ts",
+      "accessCount": 3,
+      "lastAccessed": 1775918967940,
+      "type": "file"
+    },
+    {
+      "path": "drizzle.config.ts",
+      "accessCount": 3,
+      "lastAccessed": 1775918981293,
       "type": "file"
     },
     {
@@ -137,21 +251,9 @@
       "type": "file"
     },
     {
-      "path": "package.json",
-      "accessCount": 1,
-      "lastAccessed": 1775899488510,
-      "type": "file"
-    },
-    {
-      "path": "app/app.vue",
-      "accessCount": 1,
-      "lastAccessed": 1775899538489,
-      "type": "file"
-    },
-    {
-      "path": "app/pages/index.vue",
-      "accessCount": 1,
-      "lastAccessed": 1775899564689,
+      "path": "tsconfig.json",
+      "accessCount": 2,
+      "lastAccessed": 1775906278042,
       "type": "file"
     },
     {
@@ -164,12 +266,6 @@
       "path": "app/pages/[board]/[...slug].vue",
       "accessCount": 1,
       "lastAccessed": 1775899565582,
-      "type": "file"
-    },
-    {
-      "path": "app/layouts/default.vue",
-      "accessCount": 1,
-      "lastAccessed": 1775899566068,
       "type": "file"
     },
     {
@@ -302,6 +398,18 @@
       "path": "app/assets/css/components.css",
       "accessCount": 1,
       "lastAccessed": 1775900170826,
+      "type": "file"
+    },
+    {
+      "path": ".claudeignore",
+      "accessCount": 1,
+      "lastAccessed": 1775900561265,
+      "type": "file"
+    },
+    {
+      "path": "docker-compose.dev.yml",
+      "accessCount": 1,
+      "lastAccessed": 1775906248015,
       "type": "file"
     }
   ],

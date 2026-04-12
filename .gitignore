@@ -23,4 +23,11 @@ logs
 .env.*
 !.env.example
 
-pnpm-lock.yaml
+# Drizzle
+drizzle/
+
+# Uploads
+uploads/
+
+# Oh My ClaudeCode
+.omc/

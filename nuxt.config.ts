@@ -1,38 +1,56 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import tailwindcss from '@tailwindcss/vite'
+
 export default defineNuxtConfig({
-  modules: [
-    '@nuxt/content',
-    '@nuxtjs/sitemap',
+  modules: ['@nuxt/eslint', '@nuxt/ui'],
+
+  components: [
+    { path: '~/components', pathPrefix: false }
   ],
-  components: {
-    pathPrefix: false,
+
+  css: [],
+
+  devtools: { enabled: false },
+
+  compatibilityDate: '2025-01-15',
+
+  alias: {
+    '#shared': '../shared'
   },
-  site: {
-    url: 'https://gomj.dev',
-  },
-  devtools: { enabled: true },
-  compatibilityDate: '2024-04-03',
-  css: [
-    '~/assets/css/variables.css',
-    '~/assets/css/base.css',
-    '~/assets/css/layout.css',
-    '~/assets/css/components.css',
-  ],
+
   app: {
     head: {
       htmlAttrs: { lang: 'ko' },
-      title: 'GOMJ Portfolio',
-      meta: [
-        { name: 'description', content: 'GOMJ 개발 포트폴리오' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { property: 'og:type', content: 'website' },
-        { property: 'og:title', content: 'GOMJ Portfolio' },
-        { property: 'og:description', content: 'GOMJ 개발 포트폴리오 & 기술 블로그' },
-        { property: 'og:site_name', content: 'GOMJ Portfolio' },
-        { name: 'twitter:card', content: 'summary' },
-        { name: 'twitter:title', content: 'GOMJ Portfolio' },
-        { name: 'twitter:description', content: 'GOMJ 개발 포트폴리오 & 기술 블로그' },
-      ],
-    },
+      viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+      title: 'GOMJ Wiki'
+    }
   },
+
+  vite: {
+    plugins: [tailwindcss()],
+    optimizeDeps: {
+      include: [
+        '@nuxt/ui > prosemirror-state',
+        '@nuxt/ui > prosemirror-transform',
+        '@nuxt/ui > prosemirror-model',
+        '@nuxt/ui > prosemirror-view',
+        '@nuxt/ui > prosemirror-gapcursor'
+      ]
+    }
+  },
+
+  nitro: {
+    publicAssets: [
+      { dir: 'uploads', maxAge: 60 * 60 * 24 * 30 }
+    ],
+    alias: {
+      '#shared': new URL('./shared', import.meta.url).pathname
+    }
+  },
+
+  runtimeConfig: {
+    databaseUrl: process.env.DATABASE_URL ?? '',
+    betterAuthSecret: process.env.BETTER_AUTH_SECRET ?? '',
+    betterAuthUrl: process.env.BETTER_AUTH_URL ?? 'http://localhost:3000',
+    useDatabaseMode: process.env.USE_DATABASE_MODE ?? 'POSTGRES'
+  }
 })

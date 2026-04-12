@@ -1,22 +1,20 @@
 <script setup lang="ts">
-import type { NuxtError } from '#app'
-
-defineProps<{
-  error: NuxtError
+const props = defineProps<{
+  error: { statusCode: number; message?: string }
 }>()
-
-function handleBack() {
-  clearError({ redirect: '/' })
-}
 </script>
 
 <template>
-  <div class="error-page">
-    <div class="error-page__content">
-      <h1 class="error-page__code">{{ error.statusCode }}</h1>
-      <p class="error-page__message">{{ error.statusCode === 404 ? '페이지를 찾을 수 없습니다' : '오류가 발생했습니다' }}</p>
-      <p class="error-page__description">요청하신 페이지가 존재하지 않거나 이동되었을 수 있습니다.</p>
-      <button class="error-page__button" @click="handleBack">홈으로 돌아가기</button>
-    </div>
+  <div class="flex flex-col items-center justify-center min-h-screen gap-4">
+    <span class="text-6xl font-bold text-gray-400">{{ error.statusCode }}</span>
+    <p class="text-gray-500">
+      {{ error.statusCode === 404 ? '페이지를 찾을 수 없습니다' : '서버 오류가 발생했습니다' }}
+    </p>
+    <button
+      class="px-6 py-2 rounded-full border border-gray-300 hover:bg-gray-100 transition"
+      @click="clearError({ redirect: '/' })"
+    >
+      홈으로 돌아가기
+    </button>
   </div>
 </template>
