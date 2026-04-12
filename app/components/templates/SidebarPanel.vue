@@ -11,7 +11,7 @@
         @search="handleSearch"
         @add-root="(type) => handleAddNode(null, type)"
       />
-      <SidebarNavTree :collapsed="collapsed" @navigate="handleNavigate" @add-node="handleAddNode" />
+      <SidebarNavTree :collapsed="collapsed" @navigate="handleNavigate" @add-node="handleAddNode" @rename-node="handleRenameNode" />
     </template>
 
     <template #footer="{ collapsed }">
@@ -89,6 +89,13 @@ const handleAddNode = (parentId: string | null, type: AddNodeType) => {
     }
     setAllPages([...allPages.value, newPage])
     router.push('/' + newPage.slug)
+  }
+}
+
+const handleRenameNode = (id: string, name: string) => {
+  const folder = folders.value.find(f => f.id === id)
+  if (folder) {
+    setFolders(folders.value.map(f => f.id === id ? { ...f, name, updatedAt: new Date().toISOString() } : f))
   }
 }
 

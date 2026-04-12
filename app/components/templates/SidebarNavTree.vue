@@ -22,6 +22,7 @@
       :active-slug="activeSlug"
       @navigate="emit('navigate', $event)"
       @add-child="(parentId: string, type: AddNodeType) => emit('addNode', parentId, type)"
+      @rename="(id: string, name: string) => emit('renameNode', id, name)"
     />
     <div
       v-if="tree.length === 0 && !collapsed"
@@ -43,6 +44,7 @@ defineProps<{
 const emit = defineEmits<{
   navigate: [slug: string]
   addNode: [parentId: string | null, type: AddNodeType]
+  renameNode: [id: string, name: string]
 }>()
 
 const { folders } = useFolderStore()

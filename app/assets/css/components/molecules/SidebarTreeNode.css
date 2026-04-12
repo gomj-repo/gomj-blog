@@ -54,6 +54,19 @@
   flex: 1;
 }
 
+.tree-node__name-input {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  flex: 1;
+  min-width: 0;
+  background-color: var(--sidebar-item-hover);
+  border: 1px solid var(--sidebar-border);
+  border-radius: 0.25rem;
+  color: var(--sidebar-text);
+  padding: 0 0.25rem;
+  outline: none;
+}
+
 .tree-node__action-button {
   padding: 0;
   width: 1rem;

@@ -24,7 +24,21 @@
 
       <TreeNodeIcon :type="node.type" :open="isOpen" />
 
-      <span v-if="!collapsed" class="tree-node__name">{{ node.name }}</span>
+      <input
+        v-if="!collapsed && isEditing"
+        ref="nameInputRef"
+        v-model="editName"
+        class="tree-node__name-input"
+        @click.stop
+        @keydown.enter="onEnter"
+        @keydown.escape="cancelRename"
+        @blur="confirmRename"
+      />
+      <span
+        v-else-if="!collapsed"
+        class="tree-node__name"
+        @click.stop="handleNameClick"
+      >{{ node.name }}</span>
 
       <template v-if="!collapsed && node.type === 'folder'">
         <UDropdownMenu :items="addChildItems">
@@ -62,6 +76,7 @@
         :active-slug="activeSlug"
         @navigate="emit('navigate', $event)"
         @add-child="(parentId: string, type: AddNodeType) => emit('addChild', parentId, type)"
+        @rename="(id: string, name: string) => emit('rename', id, name)"
       />
     </div>
   </div>
@@ -82,6 +97,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   navigate: [slug: string]
   addChild: [parentId: string, type: AddNodeType]
+  rename: [id: string, name: string]
 }>()
 
 const depth = computed(() => props.depth ?? 0)
@@ -118,14 +134,51 @@ const sortChildItems: DropdownMenuItem[] = [
   }
 ]
 
+const isEditing = ref(false)
+const editName = ref('')
+const nameInputRef = ref<HTMLInputElement | null>(null)
+
+const startRename = () => {
+  editName.value = props.node.name
+  isEditing.value = true
+  nextTick(() => {
+    nameInputRef.value?.focus()
+    nameInputRef.value?.select()
+  })
+}
+
+const onEnter = (e: KeyboardEvent) => {
+  if (e.isComposing) return
+  confirmRename()
+}
+
+const confirmRename = () => {
+  if (!isEditing.value) return
+  const trimmed = editName.value.trim()
+  if (trimmed && trimmed !== props.node.name) {
+    emit('rename', props.node.id, trimmed)
+  }
+  isEditing.value = false
+}
+
+const cancelRename = () => {
+  isEditing.value = false
+}
+
 const toggleOpen = () => {
   isOpen.value = !isOpen.value
 }
 
-const handleClick = () => {
-  if (props.node.type === 'page') {
-    emit('navigate', props.node.slug)
+const handleNameClick = () => {
+  if (props.node.type === 'folder') {
+    startRename()
   } else {
+    emit('navigate', props.node.slug)
+  }
+}
+
+const handleClick = () => {
+  if (props.node.type === 'folder') {
     toggleOpen()
   }
 }

@@ -171,15 +171,15 @@
   },
   "hotPaths": [
     {
-      "path": "app/components/templates/SidebarPanel.vue",
-      "accessCount": 22,
-      "lastAccessed": 1775994477273,
+      "path": "app/components/mocules/SidebarTreeNode.vue",
+      "accessCount": 32,
+      "lastAccessed": 1775995497040,
       "type": "file"
     },
     {
-      "path": "app/components/mocules/SidebarTreeNode.vue",
-      "accessCount": 21,
-      "lastAccessed": 1775994758914,
+      "path": "app/components/templates/SidebarPanel.vue",
+      "accessCount": 25,
+      "lastAccessed": 1775995065651,
       "type": "file"
     },
     {
@@ -189,16 +189,16 @@
       "type": "file"
     },
     {
+      "path": "app/components/templates/SidebarNavTree.vue",
+      "accessCount": 17,
+      "lastAccessed": 1775995027481,
+      "type": "file"
+    },
+    {
       "path": "",
       "accessCount": 14,
       "lastAccessed": 1775991041144,
       "type": "directory"
-    },
-    {
-      "path": "app/components/templates/SidebarNavTree.vue",
-      "accessCount": 14,
-      "lastAccessed": 1775994238948,
-      "type": "file"
     },
     {
       "path": "app/layouts/default.vue",
@@ -214,8 +214,8 @@
     },
     {
       "path": "app/assets/css/components/molecules/SidebarTreeNode.css",
-      "accessCount": 8,
-      "lastAccessed": 1775994775874,
+      "accessCount": 9,
+      "lastAccessed": 1775995093518,
       "type": "file"
     },
     {
