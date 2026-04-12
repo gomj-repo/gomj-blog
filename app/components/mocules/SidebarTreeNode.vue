@@ -170,16 +170,14 @@ const toggleOpen = () => {
 }
 
 const handleNameClick = () => {
-  if (props.node.type === 'folder') {
-    startRename()
-  } else {
-    emit('navigate', props.node.slug)
-  }
+  startRename()
 }
 
 const handleClick = () => {
   if (props.node.type === 'folder') {
     toggleOpen()
+  } else {
+    emit('navigate', props.node.slug)
   }
 }
 </script>

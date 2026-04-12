@@ -11,6 +11,17 @@
     >
       <TreeNodeIcon type="home" />
       <span v-if="!collapsed" class="tree-node__name">Home</span>
+      <UDropdownMenu v-if="!collapsed" :items="addRootItems">
+        <UButton
+          variant="ghost"
+          color="neutral"
+          size="xs"
+          icon="i-lucide-plus"
+          class="tree-node__action-button"
+          aria-label="Add new item"
+          @click.stop
+        />
+      </UDropdownMenu>
     </div>
 
     <SidebarTreeNode
@@ -34,6 +45,7 @@
 </template>
 
 <script setup lang="ts">
+import type { DropdownMenuItem } from '@nuxt/ui'
 import { buildSidebarTree } from '~/composables/action/useSidebarTree'
 import type { AddNodeType } from '~/components/mocules/SidebarSearchInput.vue'
 
@@ -49,6 +61,20 @@ const emit = defineEmits<{
 
 const { folders } = useFolderStore()
 const { allPages, currentPage } = usePageStore()
+
+const addRootItems: DropdownMenuItem[] = [
+  {
+    label: '페이지',
+    icon: 'i-lucide-file-text',
+    onSelect: () => emit('addNode', null, 'page')
+  },
+  { type: 'separator' },
+  {
+    label: '폴더',
+    icon: 'i-lucide-folder',
+    onSelect: () => emit('addNode', null, 'folder')
+  }
+]
 
 const tree = computed(() => buildSidebarTree(folders.value, allPages.value))
 const activeSlug = computed(() => currentPage.value?.slug ?? '')

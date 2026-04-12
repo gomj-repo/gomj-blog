@@ -9,7 +9,6 @@
         v-model="searchQuery"
         :collapsed="collapsed"
         @search="handleSearch"
-        @add-root="(type) => handleAddNode(null, type)"
       />
       <SidebarNavTree :collapsed="collapsed" @navigate="handleNavigate" @add-node="handleAddNode" @rename-node="handleRenameNode" />
     </template>
@@ -96,6 +95,11 @@ const handleRenameNode = (id: string, name: string) => {
   const folder = folders.value.find(f => f.id === id)
   if (folder) {
     setFolders(folders.value.map(f => f.id === id ? { ...f, name, updatedAt: new Date().toISOString() } : f))
+    return
+  }
+  const page = allPages.value.find(p => p.id === id)
+  if (page) {
+    setAllPages(allPages.value.map(p => p.id === id ? { ...p, title: name, updatedAt: new Date().toISOString() } : p))
   }
 }
 

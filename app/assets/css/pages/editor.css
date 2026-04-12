@@ -22,44 +22,26 @@
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--color-neutral-800, #262626);
+  cursor: text;
 }
 
-.editor-toolbar {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  padding: 0.5rem;
-  border: 1px solid var(--color-neutral-800, #262626);
-  border-radius: 0.5rem;
+.editor-page__title-input {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-neutral-100, #f5f5f5);
   margin-bottom: 1rem;
-  flex-wrap: wrap;
-  background-color: var(--color-neutral-950, #0a0a0a);
-}
-
-.editor-toolbar__group {
-  display: flex;
-  align-items: center;
-  gap: 0.125rem;
-}
-
-.editor-toolbar__separator {
-  width: 1px;
-  height: 1.5rem;
-  background-color: var(--color-neutral-800, #262626);
-  margin: 0 0.25rem;
-}
-
-.editor-toolbar .is-active {
-  background-color: var(--color-neutral-800, #262626);
-  color: var(--color-primary-400, #60a5fa);
+  padding-bottom: 0.5rem;
+  border: none;
+  border-bottom: 1px solid var(--color-primary-400, #60a5fa);
+  background: transparent;
+  outline: none;
+  width: 100%;
 }
 
 .editor-content {
   flex: 1;
   overflow-y: auto;
-  border: 1px solid var(--color-neutral-800, #262626);
-  border-radius: 0.5rem;
-  padding: 1.5rem;
+  padding: 0.5rem 0;
 }
 
 .editor-content :deep(.tiptap) {
@@ -68,6 +50,14 @@
   color: var(--color-neutral-200, #e5e5e5);
   font-size: 1rem;
   line-height: 1.75;
+}
+
+.editor-content :deep(.tiptap p.is-editor-empty:first-child::before) {
+  content: attr(data-placeholder);
+  float: left;
+  color: var(--color-neutral-600, #525252);
+  pointer-events: none;
+  height: 0;
 }
 
 .editor-content :deep(.tiptap p) {

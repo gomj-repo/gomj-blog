@@ -172,26 +172,26 @@
   "hotPaths": [
     {
       "path": "app/components/mocules/SidebarTreeNode.vue",
-      "accessCount": 32,
-      "lastAccessed": 1775995497040,
+      "accessCount": 35,
+      "lastAccessed": 1775996057268,
       "type": "file"
     },
     {
       "path": "app/components/templates/SidebarPanel.vue",
-      "accessCount": 25,
-      "lastAccessed": 1775995065651,
-      "type": "file"
-    },
-    {
-      "path": "app/components/mocules/SidebarSearchInput.vue",
-      "accessCount": 17,
-      "lastAccessed": 1775994477861,
+      "accessCount": 28,
+      "lastAccessed": 1775996142310,
       "type": "file"
     },
     {
       "path": "app/components/templates/SidebarNavTree.vue",
-      "accessCount": 17,
-      "lastAccessed": 1775995027481,
+      "accessCount": 21,
+      "lastAccessed": 1775996131268,
+      "type": "file"
+    },
+    {
+      "path": "app/components/mocules/SidebarSearchInput.vue",
+      "accessCount": 20,
+      "lastAccessed": 1775996095938,
       "type": "file"
     },
     {
@@ -261,6 +261,12 @@
       "type": "file"
     },
     {
+      "path": "app/pages/[slug].vue",
+      "accessCount": 5,
+      "lastAccessed": 1775996191457,
+      "type": "file"
+    },
+    {
       "path": "app/composables/store/useAuthStore.ts",
       "accessCount": 4,
       "lastAccessed": 1775987414847,
@@ -309,6 +315,12 @@
       "type": "file"
     },
     {
+      "path": "app/assets/css/pages/editor.css",
+      "accessCount": 3,
+      "lastAccessed": 1775996215230,
+      "type": "file"
+    },
+    {
       "path": "app/app.vue",
       "accessCount": 2,
       "lastAccessed": 1775987376982,
@@ -343,12 +355,6 @@
       "accessCount": 2,
       "lastAccessed": 1775994423961,
       "type": "directory"
-    },
-    {
-      "path": "app/pages/[slug].vue",
-      "accessCount": 2,
-      "lastAccessed": 1775994478777,
-      "type": "file"
     },
     {
       "path": "package.json",
@@ -439,12 +445,6 @@
       "accessCount": 1,
       "lastAccessed": 1775991453033,
       "type": "directory"
-    },
-    {
-      "path": "app/assets/css/pages/editor.css",
-      "accessCount": 1,
-      "lastAccessed": 1775994419959,
-      "type": "file"
     }
   ],
   "userDirectives": []
