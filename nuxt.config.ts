@@ -7,7 +7,15 @@ export default defineNuxtConfig({
     { path: '~/components', pathPrefix: false }
   ],
 
-  css: [],
+  imports: {
+    dirs: [
+      'composables/action',
+      'composables/sideeffect',
+      'composables/store'
+    ]
+  },
+
+  css: ['~/assets/css/base/main.css'],
 
   devtools: { enabled: false },
 

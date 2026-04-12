@@ -1,0 +1,21 @@
+{
+    "env": {
+        "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+    },
+    "enabledPlugins": {
+        "oh-my-claudecode@omc": true
+    },
+    "permissions": {
+        "allow": [
+            "Skill(update-config)",
+            "Read(//Users/kmj/.claude/**)",
+            "Read(//Users/kmj/.claude/skills/**)",
+            "WebSearch",
+            "WebFetch(domain:github.com)",
+            "WebFetch(domain:nuxt.com)",
+            "WebFetch(domain:content.nuxt.com)",
+            "WebFetch(domain:velog.io)",
+            "Bash(grep:*)"
+        ]
+    }
+}

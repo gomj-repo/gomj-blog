@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+:root {
+  --sidebar-width: 16rem;
+  --sidebar-bg: var(--color-neutral-900, #171717);
+  --sidebar-text: var(--color-neutral-100, #f5f5f5);
+  --sidebar-border: var(--color-neutral-800, #262626);
+  --sidebar-item-hover: var(--color-neutral-800, #262626);
+  --sidebar-item-active: var(--color-neutral-700, #404040);
+}

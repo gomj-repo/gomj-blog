@@ -1,0 +1,26 @@
+# Build outputs
+.output/
+.nuxt/
+.nitro/
+dist/
+
+# Dependencies
+node_modules/
+
+# IDE / editor
+.idea/
+.fleet/
+.vscode/
+
+# OMC state (agent orchestration)
+.omc/
+
+# Environment variables
+.env
+.env.*
+
+# Logs & cache
+logs/
+*.log
+.cache/
+.data/
