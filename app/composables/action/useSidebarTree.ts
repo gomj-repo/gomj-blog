@@ -1,7 +1,7 @@
 import type { SavedFolder } from '#shared/types/folder'
 import type { SavedPage } from '#shared/types/page'
 
-export type SidebarNodeType = 'folder' | 'page'
+export type SidebarNodeType = 'folder' | 'page' | 'home'
 
 export interface SidebarTreeNode {
   id: string

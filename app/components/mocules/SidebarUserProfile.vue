@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="isAuthenticated && user"
-    class="flex items-center gap-2 px-3 py-2 border-t border-[var(--sidebar-border)]"
+    class="sidebar-user-profile"
   >
     <UAvatar
       :alt="user.name"
@@ -9,8 +9,8 @@
       class="shrink-0"
     />
     <div v-if="!collapsed" class="flex-1 min-w-0">
-      <p class="text-xs font-medium truncate text-[var(--sidebar-text)]">{{ user.name }}</p>
-      <p class="text-xs truncate text-[var(--sidebar-text)] opacity-60">{{ user.email }}</p>
+      <p class="sidebar-user-profile__name">{{ user.name }}</p>
+      <p class="sidebar-user-profile__email">{{ user.email }}</p>
     </div>
     <UButton
       v-if="!collapsed"
@@ -18,7 +18,7 @@
       color="neutral"
       size="xs"
       icon="i-lucide-log-out"
-      class="shrink-0 text-[var(--sidebar-text)] opacity-60 hover:opacity-100 hover:bg-[var(--sidebar-item-hover)]"
+      class="sidebar-user-profile__logout"
       aria-label="Sign out"
       @click="emit('logout')"
     />
@@ -36,3 +36,5 @@ const emit = defineEmits<{
   logout: []
 }>()
 </script>
+
+<style scoped src="~/assets/css/components/molecules/SidebarUserProfile.css"></style>

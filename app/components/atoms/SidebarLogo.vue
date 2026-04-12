@@ -1,9 +1,9 @@
 <template>
-  <div class="flex items-center gap-2 px-4 py-3 select-none">
-    <UIcon name="i-lucide-book-open" class="text-[var(--sidebar-text)] shrink-0" :style="{ width: '1.25rem', height: '1.25rem' }" />
+  <div class="sidebar-logo" :class="{ 'is-collapsed': collapsed }">
+    <UIcon name="i-lucide-book-open" class="sidebar-logo__icon" :style="{ width: '1.25rem', height: '1.25rem' }" />
     <span
       v-if="!collapsed"
-      class="font-semibold text-sm truncate text-[var(--sidebar-text)]"
+      class="sidebar-logo__title"
     >{{ title }}</span>
   </div>
 </template>
@@ -14,3 +14,5 @@ defineProps<{
   collapsed?: boolean
 }>()
 </script>
+
+<style scoped src="~/assets/css/components/molecules/SidebarLogo.css"></style>

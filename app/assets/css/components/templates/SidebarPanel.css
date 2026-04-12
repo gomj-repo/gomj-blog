@@ -1,0 +1,25 @@
+.sidebar-panel-footer {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border-top: 1px solid var(--sidebar-border);
+}
+
+.sidebar-panel-theme-toggle {
+  color: var(--sidebar-text);
+  opacity: 0.6;
+
+  &:hover {
+    opacity: 1;
+    background-color: var(--sidebar-item-hover);
+  }
+}
+
+.sidebar-panel-theme-label {
+  margin-left: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: var(--sidebar-text);
+  opacity: 0.4;
+  user-select: none;
+}

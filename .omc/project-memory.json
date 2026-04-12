@@ -171,21 +171,69 @@
   },
   "hotPaths": [
     {
-      "path": "",
-      "accessCount": 12,
-      "lastAccessed": 1775989446830,
-      "type": "directory"
-    },
-    {
-      "path": "app/layouts/default.vue",
-      "accessCount": 7,
-      "lastAccessed": 1775989454282,
+      "path": "app/components/templates/SidebarPanel.vue",
+      "accessCount": 22,
+      "lastAccessed": 1775994477273,
       "type": "file"
     },
     {
-      "path": "app/components/templates/SidebarPanel.vue",
-      "accessCount": 6,
-      "lastAccessed": 1775989574990,
+      "path": "app/components/mocules/SidebarTreeNode.vue",
+      "accessCount": 21,
+      "lastAccessed": 1775994758914,
+      "type": "file"
+    },
+    {
+      "path": "app/components/mocules/SidebarSearchInput.vue",
+      "accessCount": 17,
+      "lastAccessed": 1775994477861,
+      "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 14,
+      "lastAccessed": 1775991041144,
+      "type": "directory"
+    },
+    {
+      "path": "app/components/templates/SidebarNavTree.vue",
+      "accessCount": 14,
+      "lastAccessed": 1775994238948,
+      "type": "file"
+    },
+    {
+      "path": "app/layouts/default.vue",
+      "accessCount": 12,
+      "lastAccessed": 1775994479181,
+      "type": "file"
+    },
+    {
+      "path": "app/assets/css/base/main.css",
+      "accessCount": 10,
+      "lastAccessed": 1775991422764,
+      "type": "file"
+    },
+    {
+      "path": "app/assets/css/components/molecules/SidebarTreeNode.css",
+      "accessCount": 8,
+      "lastAccessed": 1775994775874,
+      "type": "file"
+    },
+    {
+      "path": "app/components/atoms/SidebarLogo.vue",
+      "accessCount": 7,
+      "lastAccessed": 1775991121246,
+      "type": "file"
+    },
+    {
+      "path": "app/components/atoms/TreeNodeIcon.vue",
+      "accessCount": 7,
+      "lastAccessed": 1775991494225,
+      "type": "file"
+    },
+    {
+      "path": "app/composables/action/useSidebarTree.ts",
+      "accessCount": 7,
+      "lastAccessed": 1775994248413,
       "type": "file"
     },
     {
@@ -195,9 +243,21 @@
       "type": "file"
     },
     {
-      "path": "app/composables/action/useSidebarTree.ts",
-      "accessCount": 4,
-      "lastAccessed": 1775987410036,
+      "path": "app/components/atoms/SidebarToggleButton.vue",
+      "accessCount": 5,
+      "lastAccessed": 1775991126588,
+      "type": "file"
+    },
+    {
+      "path": "app/components/mocules/SidebarUserProfile.vue",
+      "accessCount": 5,
+      "lastAccessed": 1775991142577,
+      "type": "file"
+    },
+    {
+      "path": "app/assets/css/components/molecules/SidebarSearchInput.css",
+      "accessCount": 5,
+      "lastAccessed": 1775994277765,
       "type": "file"
     },
     {
@@ -207,21 +267,9 @@
       "type": "file"
     },
     {
-      "path": "app/components/templates/SidebarNavTree.vue",
+      "path": "app/composables/store/useFolderStore.ts",
       "accessCount": 4,
-      "lastAccessed": 1775989653845,
-      "type": "file"
-    },
-    {
-      "path": "app/assets/css/base/main.css",
-      "accessCount": 3,
-      "lastAccessed": 1775987423371,
-      "type": "file"
-    },
-    {
-      "path": "app/components/mocules/SidebarSearchInput.vue",
-      "accessCount": 3,
-      "lastAccessed": 1775989654412,
+      "lastAccessed": 1775994249375,
       "type": "file"
     },
     {
@@ -231,21 +279,39 @@
       "type": "file"
     },
     {
-      "path": "app/app.vue",
-      "accessCount": 2,
-      "lastAccessed": 1775987376982,
+      "path": "app/assets/css/base/primitive.css",
+      "accessCount": 3,
+      "lastAccessed": 1775991429661,
       "type": "file"
     },
     {
-      "path": "app/composables/store/useFolderStore.ts",
-      "accessCount": 2,
-      "lastAccessed": 1775987410722,
+      "path": "app/assets/css/components/templates/SidebarNavTree.css",
+      "accessCount": 3,
+      "lastAccessed": 1775991540125,
       "type": "file"
     },
     {
       "path": "app/composables/store/usePageStore.ts",
+      "accessCount": 3,
+      "lastAccessed": 1775994248890,
+      "type": "file"
+    },
+    {
+      "path": "app/pages/index.vue",
+      "accessCount": 3,
+      "lastAccessed": 1775994259047,
+      "type": "file"
+    },
+    {
+      "path": "shared/types/page.ts",
+      "accessCount": 3,
+      "lastAccessed": 1775994423480,
+      "type": "file"
+    },
+    {
+      "path": "app/app.vue",
       "accessCount": 2,
-      "lastAccessed": 1775987410851,
+      "lastAccessed": 1775987376982,
       "type": "file"
     },
     {
@@ -255,39 +321,33 @@
       "type": "file"
     },
     {
-      "path": "app/components/atoms/SidebarLogo.vue",
+      "path": "app/assets/css/base/semantic.css",
       "accessCount": 2,
-      "lastAccessed": 1775987415042,
+      "lastAccessed": 1775991429252,
       "type": "file"
     },
     {
-      "path": "app/components/atoms/SidebarToggleButton.vue",
+      "path": "app/assets/css/components/common.css",
       "accessCount": 2,
-      "lastAccessed": 1775987422538,
+      "lastAccessed": 1775991448658,
       "type": "file"
     },
     {
-      "path": "app/components/atoms/TreeNodeIcon.vue",
+      "path": "shared/types/folder.ts",
       "accessCount": 2,
-      "lastAccessed": 1775987423322,
+      "lastAccessed": 1775991606766,
       "type": "file"
     },
     {
-      "path": "app/components/mocules/SidebarTreeNode.vue",
+      "path": "app/composables",
       "accessCount": 2,
-      "lastAccessed": 1775987459799,
-      "type": "file"
+      "lastAccessed": 1775994423961,
+      "type": "directory"
     },
     {
-      "path": "app/components/mocules/SidebarUserProfile.vue",
+      "path": "app/pages/[slug].vue",
       "accessCount": 2,
-      "lastAccessed": 1775987460150,
-      "type": "file"
-    },
-    {
-      "path": "app/pages/index.vue",
-      "accessCount": 2,
-      "lastAccessed": 1775989455064,
+      "lastAccessed": 1775994478777,
       "type": "file"
     },
     {
@@ -321,28 +381,10 @@
       "type": "file"
     },
     {
-      "path": "shared/types/folder.ts",
-      "accessCount": 1,
-      "lastAccessed": 1775987155138,
-      "type": "file"
-    },
-    {
-      "path": "shared/types/page.ts",
-      "accessCount": 1,
-      "lastAccessed": 1775987200376,
-      "type": "file"
-    },
-    {
       "path": "shared/types/user.ts",
       "accessCount": 1,
       "lastAccessed": 1775987200917,
       "type": "file"
-    },
-    {
-      "path": "app/composables",
-      "accessCount": 1,
-      "lastAccessed": 1775989402592,
-      "type": "directory"
     },
     {
       "path": "app/composables/sideeffect/useFolderApi.ts",
@@ -354,6 +396,54 @@
       "path": "app/composables/sideeffect/usePageApi.ts",
       "accessCount": 1,
       "lastAccessed": 1775989405879,
+      "type": "file"
+    },
+    {
+      "path": "app/assets/css/pages/index.css",
+      "accessCount": 1,
+      "lastAccessed": 1775990925659,
+      "type": "file"
+    },
+    {
+      "path": "app/assets/css/components/molecules/SidebarLogo.css",
+      "accessCount": 1,
+      "lastAccessed": 1775991097451,
+      "type": "file"
+    },
+    {
+      "path": "app/assets/css/components/molecules/SidebarToggleButton.css",
+      "accessCount": 1,
+      "lastAccessed": 1775991098183,
+      "type": "file"
+    },
+    {
+      "path": "app/assets/css/components/molecules/TreeNodeIcon.css",
+      "accessCount": 1,
+      "lastAccessed": 1775991099238,
+      "type": "file"
+    },
+    {
+      "path": "app/assets/css/components/molecules/SidebarUserProfile.css",
+      "accessCount": 1,
+      "lastAccessed": 1775991105974,
+      "type": "file"
+    },
+    {
+      "path": "app/assets/css/components/templates/SidebarPanel.css",
+      "accessCount": 1,
+      "lastAccessed": 1775991111116,
+      "type": "file"
+    },
+    {
+      "path": "app/assets/css",
+      "accessCount": 1,
+      "lastAccessed": 1775991453033,
+      "type": "directory"
+    },
+    {
+      "path": "app/assets/css/pages/editor.css",
+      "accessCount": 1,
+      "lastAccessed": 1775994419959,
       "type": "file"
     }
   ],
