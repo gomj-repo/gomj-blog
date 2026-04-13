@@ -59,6 +59,10 @@ export default defineNuxtConfig({
     databaseUrl: process.env.DATABASE_URL ?? '',
     betterAuthSecret: process.env.BETTER_AUTH_SECRET ?? '',
     betterAuthUrl: process.env.BETTER_AUTH_URL ?? 'http://localhost:3000',
-    useDatabaseMode: process.env.USE_DATABASE_MODE ?? 'POSTGRES'
+    useDatabaseMode: process.env.USE_DATABASE_MODE ?? 'POSTGRES',
+    public: {
+      supabaseUrl: process.env.SUPABASE_URL ?? '',
+      supabaseKey: process.env.SUPABASE_KEY ?? ''
+    }
   }
 })
