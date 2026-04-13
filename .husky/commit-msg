@@ -1,0 +1,26 @@
+#!/bin/sh
+
+
+commit_msg=$(cat "$1")
+
+pattern="^(feat|bug|fix|refactor|log)\(.+\): .+"
+
+if ! echo "$commit_msg" | grep -qE "$pattern"; then
+  echo ""
+  echo "커밋 메시지 형식이 올바르지 않습니다."
+  echo ""
+  echo "올바른 형식: <type>(<주제>): <설명>"
+  echo ""
+  echo "허용되는 type:"
+  echo "  feat     - 새로운 기능"
+  echo "  bug      - 버그 발견/기록"
+  echo "  fix      - 버그 수정"
+  echo "  refactor - 리팩토링"
+  echo "  log      - 로그/기록"
+  echo ""
+  echo "예시:"
+  echo "  feat(인증): 소셜 로그인 추가"
+  echo "  fix(에디터): 이미지 업로드 오류 수정"
+  echo ""
+  exit 1
+fi
