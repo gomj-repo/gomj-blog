@@ -11,6 +11,7 @@ export interface SidebarTreeNode {
   children: SidebarTreeNode[]
   folderId?: string
   parentPageId?: string | null
+  parentId?: string | null
   isHome?: boolean
 }
 
@@ -28,6 +29,7 @@ export const buildSidebarTree = (folders: SavedFolder[], pages: SavedPage[]): Si
       slug: folder.slug,
       type: 'folder',
       children: [],
+      parentId: folder.parentId,
       isHome: folder.id === homeFolderId
     })
   }

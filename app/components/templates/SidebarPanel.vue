@@ -10,7 +10,13 @@
         :collapsed="collapsed"
         @search="handleSearch"
       />
-      <SidebarNavTree :collapsed="collapsed" @navigate="handleNavigate" @add-node="handleAddNode" @rename-node="handleRenameNode" />
+      <SidebarNavTree :collapsed="collapsed" @navigate="handleNavigate" @add-node="handleAddNode" @rename-node="handleRenameNode" @delete-node="handleDeleteNode" />
+      <ConfirmDialog
+        v-model="showDeleteDialog"
+        :title="`'${deleteTarget?.name}' 삭제`"
+        :description="deleteTarget?.type === 'folder' ? '폴더와 모든 하위 항목이 삭제됩니다. 이 작업은 되돌릴 수 없습니다.' : '페이지가 영구적으로 삭제됩니다. 이 작업은 되돌릴 수 없습니다.'"
+        @confirm="confirmDelete"
+      />
     </template>
 
     <template #footer="{ collapsed }">
@@ -95,6 +101,39 @@ const handleRenameNode = async (id: string, name: string) => {
     const updated = await pageApi.updatePage(id, { title: name })
     setAllPages(allPages.value.map(p => p.id === id ? updated : p))
   }
+}
+
+const deleteTarget = ref<{ id: string; type: 'folder' | 'page'; name: string } | null>(null)
+const showDeleteDialog = ref(false)
+
+const handleDeleteNode = (id: string, type: 'folder' | 'page') => {
+  if (type === 'folder') {
+    const folder = folders.value.find(f => f.id === id)
+    if (!folder) return
+    deleteTarget.value = { id, type, name: folder.name }
+  } else {
+    const page = allPages.value.find(p => p.id === id)
+    if (!page) return
+    deleteTarget.value = { id, type, name: page.title }
+  }
+  showDeleteDialog.value = true
+}
+
+const confirmDelete = async () => {
+  if (!deleteTarget.value) return
+  const { id, type } = deleteTarget.value
+  if (type === 'folder') {
+    await folderApi.deleteFolder(id)
+  } else {
+    await pageApi.deletePage(id)
+    await pageApi.fetchAllPages()
+    const { currentPage } = usePageStore()
+    if (currentPage.value?.id === id) {
+      router.push('/')
+    }
+  }
+  showDeleteDialog.value = false
+  deleteTarget.value = null
 }
 
 const { isDark, currentMode, toggleColorMode } = useThemeStore()

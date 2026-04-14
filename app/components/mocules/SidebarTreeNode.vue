@@ -52,7 +52,7 @@
             @click.stop
           />
         </UDropdownMenu>
-        <UDropdownMenu :items="sortChildItems">
+        <UDropdownMenu :items="folderMenuItems">
           <UButton
             variant="ghost"
             color="neutral"
@@ -60,6 +60,19 @@
             icon="i-lucide-ellipsis"
             class="tree-node__action-button"
             aria-label="Sort options"
+            @click.stop
+          />
+        </UDropdownMenu>
+      </template>
+      <template v-else-if="!collapsed && node.type === 'page'">
+        <UDropdownMenu :items="pageMenuItems">
+          <UButton
+            variant="ghost"
+            color="neutral"
+            size="xs"
+            icon="i-lucide-ellipsis"
+            class="tree-node__action-button"
+            aria-label="Page options"
             @click.stop
           />
         </UDropdownMenu>
@@ -77,6 +90,7 @@
         @navigate="emit('navigate', $event)"
         @add-child="(parentId: string, type: AddNodeType) => emit('addChild', parentId, type)"
         @rename="(id: string, name: string) => emit('rename', id, name)"
+        @delete-node="(id: string, type: 'folder' | 'page') => emit('deleteNode', id, type)"
       />
     </div>
   </div>
@@ -98,6 +112,7 @@ const emit = defineEmits<{
   navigate: [slug: string]
   addChild: [parentId: string, type: AddNodeType]
   rename: [id: string, name: string]
+  deleteNode: [id: string, type: 'folder' | 'page']
 }>()
 
 const depth = computed(() => props.depth ?? 0)
@@ -118,21 +133,43 @@ const addChildItems: DropdownMenuItem[] = [
   }
 ]
 
-const sortChildItems: DropdownMenuItem[] = [
-  { type: 'label', label: '정렬' },
+const folderMenuItems = computed<DropdownMenuItem[]>(() => {
+  const sortItems: DropdownMenuItem[] = [
+    { type: 'label', label: '정렬' },
+    {
+      label: '트리 순서',
+      icon: 'i-lucide-list-tree'
+    },
+    {
+      label: '최근 수정',
+      icon: 'i-lucide-clock'
+    },
+    {
+      label: '제목 오름차순',
+      icon: 'i-lucide-arrow-up-a-z'
+    }
+  ]
+  if (props.node.parentId === null) return sortItems
+  return [
+    ...sortItems,
+    { type: 'separator' },
+    {
+      label: '삭제',
+      icon: 'i-lucide-trash-2',
+      color: 'error',
+      onSelect: () => emit('deleteNode', props.node.id, 'folder')
+    }
+  ]
+})
+
+const pageMenuItems = computed<DropdownMenuItem[]>(() => [
   {
-    label: '트리 순서',
-    icon: 'i-lucide-list-tree'
-  },
-  {
-    label: '최근 수정',
-    icon: 'i-lucide-clock'
-  },
-  {
-    label: '제목 오름차순',
-    icon: 'i-lucide-arrow-up-a-z'
+    label: '삭제',
+    icon: 'i-lucide-trash-2',
+    color: 'error',
+    onSelect: () => emit('deleteNode', props.node.id, 'page')
   }
-]
+])
 
 const isEditing = ref(false)
 const editName = ref('')
