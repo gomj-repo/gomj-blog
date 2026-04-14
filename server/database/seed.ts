@@ -11,7 +11,7 @@ async function seed() {
   const ADMIN_ID = 'admin_master_01'
   const adminData = {
     email: process.env.ADMIN_EMAIL ?? 'admin@gomj.dev',
-    password: process.env.ADMIN_PASSWORD ?? '!gomjwiki2242',
+    password: process.env.ADMIN_PASSWORD ?? '!gomj1234',
     name: '관리자'
   }
 

@@ -12,6 +12,9 @@ const isMemoryMode = process.env.USE_DATABASE_MODE === 'MEMORY'
 export const auth = isMemoryMode ? null : betterAuth({
   secret: process.env.BETTER_AUTH_SECRET,
   baseURL: process.env.BETTER_AUTH_URL,
+  trustedOrigins: process.env.BETTER_AUTH_TRUSTED_ORIGINS
+    ? process.env.BETTER_AUTH_TRUSTED_ORIGINS.split(',')
+    : [],
   database: drizzleAdapter(db!, {
     provider: 'pg',
     schema: {
