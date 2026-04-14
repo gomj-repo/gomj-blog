@@ -23,6 +23,10 @@
       @click="emit('logout')"
     />
   </div>
+  <NuxtLink v-else to="/login" class="sidebar-user-profile sidebar-user-profile--login">
+    <UIcon name="i-lucide-log-in" class="shrink-0" />
+    <span v-if="!collapsed">로그인</span>
+  </NuxtLink>
 </template>
 
 <script setup lang="ts">

@@ -51,7 +51,7 @@ export default defineNuxtConfig({
       { dir: 'uploads', maxAge: 60 * 60 * 24 * 30 }
     ],
     alias: {
-      '#shared': new URL('./shared', import.meta.url).pathname
+      '#shared': new URL('./shared', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1')
     }
   },
 

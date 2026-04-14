@@ -1,4 +1,18 @@
 {
+    "hooks": {
+        "PreToolUse": [
+            {
+                "matcher": "Read",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "bash -c 'INPUT=$(cat); FILE=$(echo \"$INPUT\" | python3 -c \"import sys,json; print(json.load(sys.stdin).get(\\\"file_path\\\",\\\"\\\"))\"); BASE=$(basename \"$FILE\"); if [[ \"$BASE\" == \".env\" || ( \"$BASE\" == .env.* && \"$BASE\" != \".env.example\" ) ]]; then echo \"BLOCKED: $BASE contains secrets. Use .env.example instead.\" >&2; exit 2; fi'",
+                        "statusMessage": "Checking secret file access..."
+                    }
+                ]
+            }
+        ]
+    },
     "env": {
         "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
     },
