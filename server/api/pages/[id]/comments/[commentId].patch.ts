@@ -1,13 +1,13 @@
 import { updateCommentSchema } from '#shared/schemas/comment.schema'
 import { commentRepository } from '../../../../repositories'
 import { requireSession } from '../../../../utils/session'
+import { requireParam } from '../../../../utils/params'
 
 /** PATCH /api/pages/:id/comments/:commentId - 댓글 본문을 수정한다. 작성자 본인만 가능. */
 export default defineEventHandler(async (event) => {
   const sessionUser = await requireSession(event)
 
-  const commentId = getRouterParam(event, 'commentId')
-  if (!commentId) throw createError({ statusCode: 400, message: '댓글 ID가 필요합니다.' })
+  const commentId = requireParam(event, 'commentId')
 
   const existing = await commentRepository.getComment(commentId)
   if (!existing) throw createError({ statusCode: 404, message: '댓글을 찾을 수 없습니다.' })

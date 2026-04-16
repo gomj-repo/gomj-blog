@@ -2,15 +2,10 @@ import { randomUUID } from 'node:crypto'
 import { eq, and, asc, desc } from 'drizzle-orm'
 import type { CreatePageInput, UpdatePageInput } from '#shared/schemas/page.schema'
 import type { IPageRepository, SavedPage } from './page.repository'
-import { db as _db } from '../utils/db'
+import { getRequiredDb } from '../utils/db'
 import { pages } from '../database/schema/pages'
 import { extractPlainText } from '../utils/tiptap'
 
-/** DB 연결이 없으면 에러를 던진다. */
-function getDb() {
-  if (!_db) throw new Error('DrizzlePageRepository requires a database connection')
-  return _db
-}
 
 /** Drizzle 행을 `SavedPage` 타입으로 변환한다. */
 const toSavedPage = (row: typeof pages.$inferSelect): SavedPage => ({
@@ -46,7 +41,7 @@ class DrizzlePageRepository implements IPageRepository {
     const content = input.content ?? null
     const plainText = extractPlainText(content as Record<string, unknown> | null)
 
-    const [row] = await getDb()
+    const [row] = await getRequiredDb()
       .insert(pages)
       .values({
         id,
@@ -66,7 +61,7 @@ class DrizzlePageRepository implements IPageRepository {
   }
 
   async getPage(id: string): Promise<SavedPage | null> {
-    const [row] = await getDb()
+    const [row] = await getRequiredDb()
       .select()
       .from(pages)
       .where(eq(pages.id, id))
@@ -76,7 +71,7 @@ class DrizzlePageRepository implements IPageRepository {
   }
 
   async getPageBySlug(folderId: string, slug: string): Promise<SavedPage | null> {
-    const [row] = await getDb()
+    const [row] = await getRequiredDb()
       .select()
       .from(pages)
       .where(and(eq(pages.folderId, folderId), eq(pages.slug, slug)))
@@ -86,7 +81,7 @@ class DrizzlePageRepository implements IPageRepository {
   }
 
   async listAllPages(): Promise<SavedPage[]> {
-    const rows = await getDb()
+    const rows = await getRequiredDb()
       .select()
       .from(pages)
       .orderBy(asc(pages.sortOrder), asc(pages.title))
@@ -95,7 +90,7 @@ class DrizzlePageRepository implements IPageRepository {
   }
 
   async listPagesByFolder(folderId: string): Promise<SavedPage[]> {
-    const rows = await getDb()
+    const rows = await getRequiredDb()
       .select()
       .from(pages)
       .where(eq(pages.folderId, folderId))
@@ -105,7 +100,7 @@ class DrizzlePageRepository implements IPageRepository {
   }
 
   async listPublicPages(limit = 10): Promise<SavedPage[]> {
-    const rows = await getDb()
+    const rows = await getRequiredDb()
       .select()
       .from(pages)
       .where(eq(pages.isPublic, true))
@@ -128,7 +123,7 @@ class DrizzlePageRepository implements IPageRepository {
     if (input.status !== undefined) values.status = input.status
     if (input.sortOrder !== undefined) values.sortOrder = input.sortOrder
 
-    const [row] = await getDb()
+    const [row] = await getRequiredDb()
       .update(pages)
       .set(values)
       .where(eq(pages.id, id))
@@ -138,7 +133,7 @@ class DrizzlePageRepository implements IPageRepository {
   }
 
   async deletePage(id: string): Promise<boolean> {
-    const result = await getDb()
+    const result = await getRequiredDb()
       .delete(pages)
       .where(eq(pages.id, id))
       .returning()
@@ -147,7 +142,7 @@ class DrizzlePageRepository implements IPageRepository {
   }
 
   async reorderPages(folderId: string, orderedIds: string[]): Promise<void> {
-    const db = getDb()
+    const db = getRequiredDb()
     for (let i = 0; i < orderedIds.length; i++) {
       await db
         .update(pages)

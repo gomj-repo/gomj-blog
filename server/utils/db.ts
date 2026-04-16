@@ -12,3 +12,9 @@ const pool = isMemoryMode ? undefined : new pg.Pool({ connectionString: process.
 
 /** Drizzle ORM 인스턴스. 메모리 모드에서는 `null`. */
 export const db = pool ? drizzle(pool, { schema }) : null
+
+/** DB 연결을 반환한다. 연결이 없으면 에러를 던진다. */
+export function getRequiredDb() {
+  if (!db) throw new Error('데이터베이스 연결이 필요합니다.')
+  return db
+}

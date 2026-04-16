@@ -4,16 +4,11 @@ import type { CreateTagInput } from '#shared/schemas/tag.schema'
 import type { SavedTag } from '#shared/types/tag'
 import type { SavedPage } from '#shared/types/page'
 import type { ITagRepository } from './tag.repository'
-import { db as _db } from '../utils/db'
+import { getRequiredDb } from '../utils/db'
 import { tags } from '../database/schema/tags'
 import { pageTags } from '../database/schema/tags'
 import { pages } from '../database/schema/pages'
 
-/** DB 연결이 없으면 에러를 던진다. */
-function getDb() {
-  if (!_db) throw new Error('DrizzleTagRepository requires a database connection')
-  return _db
-}
 
 /** Drizzle 행을 `SavedTag` 타입으로 변환한다. */
 const toSavedTag = (row: typeof tags.$inferSelect): SavedTag => ({
@@ -41,7 +36,7 @@ const toSavedPage = (row: typeof pages.$inferSelect): SavedPage => ({
 class DrizzleTagRepository implements ITagRepository {
   async createTag(input: CreateTagInput): Promise<SavedTag> {
     const id = randomUUID()
-    const [row] = await getDb()
+    const [row] = await getRequiredDb()
       .insert(tags)
       .values({ id, name: input.name })
       .returning()
@@ -51,7 +46,7 @@ class DrizzleTagRepository implements ITagRepository {
   }
 
   async getTag(id: string): Promise<SavedTag | null> {
-    const [row] = await getDb()
+    const [row] = await getRequiredDb()
       .select()
       .from(tags)
       .where(eq(tags.id, id))
@@ -61,7 +56,7 @@ class DrizzleTagRepository implements ITagRepository {
   }
 
   async getTagByName(name: string): Promise<SavedTag | null> {
-    const [row] = await getDb()
+    const [row] = await getRequiredDb()
       .select()
       .from(tags)
       .where(eq(tags.name, name))
@@ -71,7 +66,7 @@ class DrizzleTagRepository implements ITagRepository {
   }
 
   async listTags(): Promise<SavedTag[]> {
-    const rows = await getDb()
+    const rows = await getRequiredDb()
       .select()
       .from(tags)
       .orderBy(asc(tags.name))
@@ -80,7 +75,7 @@ class DrizzleTagRepository implements ITagRepository {
   }
 
   async deleteTag(id: string): Promise<boolean> {
-    const result = await getDb()
+    const result = await getRequiredDb()
       .delete(tags)
       .where(eq(tags.id, id))
       .returning()
@@ -90,14 +85,14 @@ class DrizzleTagRepository implements ITagRepository {
 
   /** 중복 연결은 `onConflictDoNothing`으로 무시한다. */
   async addTagToPage(pageId: string, tagId: string): Promise<void> {
-    await getDb()
+    await getRequiredDb()
       .insert(pageTags)
       .values({ pageId, tagId })
       .onConflictDoNothing()
   }
 
   async removeTagFromPage(pageId: string, tagId: string): Promise<boolean> {
-    const result = await getDb()
+    const result = await getRequiredDb()
       .delete(pageTags)
       .where(and(eq(pageTags.pageId, pageId), eq(pageTags.tagId, tagId)))
       .returning()
@@ -107,7 +102,7 @@ class DrizzleTagRepository implements ITagRepository {
 
   /** `pageTags` JOIN `tags`로 특정 페이지의 태그를 조회한다. */
   async getTagsByPage(pageId: string): Promise<SavedTag[]> {
-    const rows = await getDb()
+    const rows = await getRequiredDb()
       .select({
         id: tags.id,
         name: tags.name,
@@ -127,7 +122,7 @@ class DrizzleTagRepository implements ITagRepository {
 
   /** `pageTags` JOIN `pages`로 특정 태그의 페이지를 조회한다. */
   async getPagesByTag(tagId: string): Promise<SavedPage[]> {
-    const rows = await getDb()
+    const rows = await getRequiredDb()
       .select({
         id: pages.id,
         folderId: pages.folderId,

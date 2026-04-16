@@ -1,14 +1,12 @@
 import { tagRepository } from '../../repositories'
 import { requireAdmin } from '../../utils/session'
+import { requireParam } from '../../utils/params'
 
 /** DELETE /api/tags/:id - 태그를 삭제한다. 관리자 전용. */
 export default defineEventHandler(async (event) => {
   await requireAdmin(event)
 
-  const id = getRouterParam(event, 'id')
-  if (!id) {
-    throw createError({ statusCode: 400, message: 'Tag ID is required' })
-  }
+  const id = requireParam(event, 'id')
 
   const deleted = await tagRepository.deleteTag(id)
   if (!deleted) {

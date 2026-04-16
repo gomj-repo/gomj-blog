@@ -1,23 +1,12 @@
+import { extractTextFromNode } from '#shared/utils/tiptap'
+export type { TipTapNode } from '#shared/utils/tiptap'
+export { extractTextFromNode }
+
 export interface TocItem {
   id: string
   text: string
   level: number
   children: TocItem[]
-}
-
-/**
- * TipTap 노드에서 순수 텍스트를 추출한다.
- */
-export function extractTextFromNode(node: Record<string, unknown>): string {
-  if (typeof node.text === 'string') {
-    return node.text
-  }
-  if (Array.isArray(node.content)) {
-    return (node.content as Record<string, unknown>[])
-      .map(extractTextFromNode)
-      .join('')
-  }
-  return ''
 }
 
 /**

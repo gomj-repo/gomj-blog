@@ -2,14 +2,9 @@ import { randomUUID } from 'node:crypto'
 import { eq, isNull, asc } from 'drizzle-orm'
 import type { CreateFolderInput, UpdateFolderInput } from '#shared/schemas/folder.schema'
 import type { IFolderRepository, SavedFolder } from './folder.repository'
-import { db as _db } from '../utils/db'
+import { getRequiredDb } from '../utils/db'
 import { folders } from '../database/schema/folders'
 
-/** DB 연결이 없으면 에러를 던진다. */
-function getDb() {
-  if (!_db) throw new Error('DrizzleFolderRepository requires a database connection')
-  return _db
-}
 
 /** Drizzle 행을 `SavedFolder` 타입으로 변환한다. */
 const toSavedFolder = (row: typeof folders.$inferSelect): SavedFolder => ({
@@ -26,7 +21,7 @@ const toSavedFolder = (row: typeof folders.$inferSelect): SavedFolder => ({
 class DrizzleFolderRepository implements IFolderRepository {
   async createFolder(input: CreateFolderInput): Promise<SavedFolder> {
     const id = randomUUID()
-    const [row] = await getDb()
+    const [row] = await getRequiredDb()
       .insert(folders)
       .values({
         id,
@@ -42,7 +37,7 @@ class DrizzleFolderRepository implements IFolderRepository {
   }
 
   async getFolder(id: string): Promise<SavedFolder | null> {
-    const [row] = await getDb()
+    const [row] = await getRequiredDb()
       .select()
       .from(folders)
       .where(eq(folders.id, id))
@@ -56,7 +51,7 @@ class DrizzleFolderRepository implements IFolderRepository {
       ? eq(folders.parentId, parentId)
       : isNull(folders.parentId)
 
-    const rows = await getDb()
+    const rows = await getRequiredDb()
       .select()
       .from(folders)
       .where(condition)
@@ -67,7 +62,7 @@ class DrizzleFolderRepository implements IFolderRepository {
   }
 
   async listFolders(): Promise<SavedFolder[]> {
-    const rows = await getDb()
+    const rows = await getRequiredDb()
       .select()
       .from(folders)
       .orderBy(asc(folders.sortOrder), asc(folders.name))
@@ -80,7 +75,7 @@ class DrizzleFolderRepository implements IFolderRepository {
       ? eq(folders.parentId, parentId)
       : isNull(folders.parentId)
 
-    const rows = await getDb()
+    const rows = await getRequiredDb()
       .select()
       .from(folders)
       .where(condition)
@@ -96,7 +91,7 @@ class DrizzleFolderRepository implements IFolderRepository {
     if (input.slug !== undefined) values.slug = input.slug
     if (input.sortOrder !== undefined) values.sortOrder = input.sortOrder
 
-    const [row] = await getDb()
+    const [row] = await getRequiredDb()
       .update(folders)
       .set(values)
       .where(eq(folders.id, id))
@@ -106,7 +101,7 @@ class DrizzleFolderRepository implements IFolderRepository {
   }
 
   async deleteFolder(id: string): Promise<boolean> {
-    const result = await getDb()
+    const result = await getRequiredDb()
       .delete(folders)
       .where(eq(folders.id, id))
       .returning()
@@ -115,7 +110,7 @@ class DrizzleFolderRepository implements IFolderRepository {
   }
 
   async reorderFolders(parentId: string | null, orderedIds: string[]): Promise<void> {
-    const db = getDb()
+    const db = getRequiredDb()
     for (let i = 0; i < orderedIds.length; i++) {
       await db
         .update(folders)

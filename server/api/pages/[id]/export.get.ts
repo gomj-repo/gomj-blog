@@ -1,10 +1,10 @@
 import { pageRepository } from '../../../repositories'
 import { tiptapJsonToMarkdown } from '../../../utils/markdown'
+import { requireParam } from '../../../utils/params'
 
 /** GET /api/pages/:id/export?format=md - 페이지를 지정된 포맷으로 내보낸다. */
 export default defineEventHandler(async (event) => {
-  const id = getRouterParam(event, 'id')
-  if (!id) throw createError({ statusCode: 400, message: '페이지 ID가 필요합니다.' })
+  const id = requireParam(event, 'id')
 
   const query = getQuery(event)
   const format = (query.format as string) || 'md'

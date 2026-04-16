@@ -1,14 +1,9 @@
 import { randomUUID } from 'node:crypto'
 import { eq, desc, max } from 'drizzle-orm'
 import type { IPageVersionRepository, SavedPageVersion } from './page-version.repository'
-import { db as _db } from '../utils/db'
+import { getRequiredDb } from '../utils/db'
 import { pageVersions } from '../database/schema/page_versions'
 
-/** DB 연결이 없으면 에러를 던진다. */
-function getDb() {
-  if (!_db) throw new Error('DrizzlePageVersionRepository requires a database connection')
-  return _db
-}
 
 /** Drizzle 행을 `SavedPageVersion` 타입으로 변환한다. */
 const toSavedPageVersion = (row: typeof pageVersions.$inferSelect): SavedPageVersion => ({
@@ -27,7 +22,7 @@ class DrizzlePageVersionRepository implements IPageVersionRepository {
     const id = randomUUID()
     const versionNumber = (await this.getLatestVersionNumber(pageId)) + 1
 
-    const [row] = await getDb()
+    const [row] = await getRequiredDb()
       .insert(pageVersions)
       .values({
         id,
@@ -44,7 +39,7 @@ class DrizzlePageVersionRepository implements IPageVersionRepository {
   }
 
   async listVersions(pageId: string): Promise<SavedPageVersion[]> {
-    const rows = await getDb()
+    const rows = await getRequiredDb()
       .select()
       .from(pageVersions)
       .where(eq(pageVersions.pageId, pageId))
@@ -54,7 +49,7 @@ class DrizzlePageVersionRepository implements IPageVersionRepository {
   }
 
   async getVersion(id: string): Promise<SavedPageVersion | null> {
-    const [row] = await getDb()
+    const [row] = await getRequiredDb()
       .select()
       .from(pageVersions)
       .where(eq(pageVersions.id, id))
@@ -64,7 +59,7 @@ class DrizzlePageVersionRepository implements IPageVersionRepository {
   }
 
   async getLatestVersionNumber(pageId: string): Promise<number> {
-    const [result] = await getDb()
+    const [result] = await getRequiredDb()
       .select({ maxVersion: max(pageVersions.versionNumber) })
       .from(pageVersions)
       .where(eq(pageVersions.pageId, pageId))

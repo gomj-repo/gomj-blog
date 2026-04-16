@@ -1,12 +1,10 @@
 import { pageRepository } from '../../repositories'
 import { getSessionUser } from '../../utils/session'
+import { requireParam } from '../../utils/params'
 
 /** GET /api/pages/:id - 페이지를 조회한다. 비공개 페이지는 관리자만 접근 가능. */
 export default defineEventHandler(async (event) => {
-  const id = getRouterParam(event, 'id')
-  if (!id) {
-    throw createError({ statusCode: 400, message: 'Page ID is required' })
-  }
+  const id = requireParam(event, 'id')
 
   const page = await pageRepository.getPage(id)
   if (!page) {

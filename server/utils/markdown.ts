@@ -1,17 +1,12 @@
+import type { TipTapNode } from '#shared/utils/tiptap'
+import { extractTextFromNode } from '#shared/utils/tiptap'
+
 /**
  * TipTap JSON 콘텐츠를 Markdown 문자열로 변환한다.
  */
 export function tiptapJsonToMarkdown(content: Record<string, unknown> | null): string {
   if (!content || !Array.isArray(content.content)) return ''
   return convertNodes(content.content as TipTapNode[]).trim()
-}
-
-interface TipTapNode {
-  type: string
-  attrs?: Record<string, unknown>
-  content?: TipTapNode[]
-  text?: string
-  marks?: Array<{ type: string; attrs?: Record<string, unknown> }>
 }
 
 function convertNodes(nodes: TipTapNode[]): string {
@@ -35,7 +30,8 @@ function convertNode(node: TipTapNode): string {
       return extractInlineText(node.content)
     case 'codeBlock': {
       const lang = (node.attrs?.language as string) || ''
-      return `\`\`\`${lang}\n${extractPlainText(node.content)}\`\`\`\n\n`
+      const codeText = node.content ? node.content.map(extractTextFromNode).join('') : ''
+      return `\`\`\`${lang}\n${codeText}\`\`\`\n\n`
     }
     case 'blockquote':
       return node.content
@@ -83,15 +79,6 @@ function extractInlineText(nodes: TipTapNode[] | undefined): string {
     if (node.type === 'text') return applyMarks(node.text || '', node.marks)
     if (node.type === 'hardBreak') return '\n'
     if (node.content) return extractInlineText(node.content)
-    return ''
-  }).join('')
-}
-
-function extractPlainText(nodes: TipTapNode[] | undefined): string {
-  if (!nodes) return ''
-  return nodes.map(node => {
-    if (node.text) return node.text
-    if (node.content) return extractPlainText(node.content)
     return ''
   }).join('')
 }

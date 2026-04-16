@@ -1,14 +1,9 @@
 import { ilike, or, eq, desc, and } from 'drizzle-orm'
 import type { SearchResult } from '#shared/types/search'
 import type { ISearchRepository } from './search.repository'
-import { db as _db } from '../utils/db'
+import { getRequiredDb } from '../utils/db'
 import { pages } from '../database/schema/pages'
 
-/** DB 연결이 없으면 에러를 던진다. */
-function getDb() {
-  if (!_db) throw new Error('DrizzleSearchRepository requires a database connection')
-  return _db
-}
 
 /** 검색어 주변 텍스트를 잘라 스니펫을 생성한다. */
 function extractSnippet(text: string | null, query: string): string {
@@ -54,7 +49,7 @@ class DrizzleSearchRepository implements ISearchRepository {
       conditions.push(eq(pages.isPublic, true))
     }
 
-    const rows = await getDb()
+    const rows = await getRequiredDb()
       .select()
       .from(pages)
       .where(and(...conditions))

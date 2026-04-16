@@ -1,30 +1,22 @@
 import { pageRepository, pageVersionRepository } from '../../../../../repositories'
 import { requireAdmin } from '../../../../../utils/session'
+import { snapshotCurrentVersion } from '../../../../../utils/page-version'
+import { requireParam } from '../../../../../utils/params'
 
 /** POST /api/pages/:id/versions/:versionId/restore - 특정 버전으로 페이지를 복원한다. 관리자 전용. */
 export default defineEventHandler(async (event) => {
   await requireAdmin(event)
 
-  const id = getRouterParam(event, 'id')
-  const versionId = getRouterParam(event, 'versionId')
-
-  if (!id) {
-    throw createError({ statusCode: 400, message: 'Page ID is required' })
-  }
-  if (!versionId) {
-    throw createError({ statusCode: 400, message: 'Version ID is required' })
-  }
+  const id = requireParam(event, 'id')
+  const versionId = requireParam(event, 'versionId')
 
   const version = await pageVersionRepository.getVersion(versionId)
   if (!version || version.pageId !== id) {
-    throw createError({ statusCode: 404, message: 'Version not found' })
+    throw createError({ statusCode: 404, message: '버전을 찾을 수 없습니다.' })
   }
 
   // 복원 전 현재 내용을 버전 스냅샷으로 저장한다.
-  const existing = await pageRepository.getPage(id)
-  if (existing && existing.content) {
-    await pageVersionRepository.createVersion(id, existing.title, existing.content, existing.plainText)
-  }
+  await snapshotCurrentVersion(id)
 
   const page = await pageRepository.updatePage(id, {
     title: version.title,
@@ -32,7 +24,7 @@ export default defineEventHandler(async (event) => {
   })
 
   if (!page) {
-    throw createError({ statusCode: 404, message: 'Page not found' })
+    throw createError({ statusCode: 404, message: '페이지를 찾을 수 없습니다.' })
   }
 
   return page

@@ -1,14 +1,9 @@
 import { randomUUID } from 'node:crypto'
 import { eq, asc } from 'drizzle-orm'
 import type { ICommentRepository, SavedComment, CreateCommentWithUserInput } from './comment.repository'
-import { db as _db } from '../utils/db'
+import { getRequiredDb } from '../utils/db'
 import { comments } from '../database/schema/comments'
 
-/** DB 연결이 없으면 에러를 던진다. */
-function getDb() {
-  if (!_db) throw new Error('DrizzleCommentRepository requires a database connection')
-  return _db
-}
 
 /** Drizzle 행을 `SavedComment` 타입으로 변환한다. */
 const toSavedComment = (row: typeof comments.$inferSelect): SavedComment => ({
@@ -26,7 +21,7 @@ class DrizzleCommentRepository implements ICommentRepository {
   async createComment(input: CreateCommentWithUserInput): Promise<SavedComment> {
     const id = randomUUID()
 
-    const [row] = await getDb()
+    const [row] = await getRequiredDb()
       .insert(comments)
       .values({
         id,
@@ -42,7 +37,7 @@ class DrizzleCommentRepository implements ICommentRepository {
   }
 
   async getComment(id: string): Promise<SavedComment | null> {
-    const [row] = await getDb()
+    const [row] = await getRequiredDb()
       .select()
       .from(comments)
       .where(eq(comments.id, id))
@@ -52,7 +47,7 @@ class DrizzleCommentRepository implements ICommentRepository {
   }
 
   async listCommentsByPage(pageId: string): Promise<SavedComment[]> {
-    const rows = await getDb()
+    const rows = await getRequiredDb()
       .select()
       .from(comments)
       .where(eq(comments.pageId, pageId))
@@ -62,7 +57,7 @@ class DrizzleCommentRepository implements ICommentRepository {
   }
 
   async updateComment(id: string, content: string): Promise<SavedComment | null> {
-    const [row] = await getDb()
+    const [row] = await getRequiredDb()
       .update(comments)
       .set({ content })
       .where(eq(comments.id, id))
@@ -72,7 +67,7 @@ class DrizzleCommentRepository implements ICommentRepository {
   }
 
   async deleteComment(id: string): Promise<boolean> {
-    const result = await getDb()
+    const result = await getRequiredDb()
       .delete(comments)
       .where(eq(comments.id, id))
       .returning()

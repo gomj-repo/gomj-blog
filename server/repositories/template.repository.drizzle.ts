@@ -3,14 +3,9 @@ import { eq, asc } from 'drizzle-orm'
 import type { CreateTemplateInput, UpdateTemplateInput } from '#shared/schemas/template.schema'
 import type { SavedTemplate } from '#shared/types/template'
 import type { ITemplateRepository } from './template.repository'
-import { db as _db } from '../utils/db'
+import { getRequiredDb } from '../utils/db'
 import { pageTemplates } from '../database/schema/page_templates'
 
-/** DB 연결이 없으면 에러를 던진다. */
-function getDb() {
-  if (!_db) throw new Error('DrizzleTemplateRepository requires a database connection')
-  return _db
-}
 
 /** Drizzle 행을 `SavedTemplate` 타입으로 변환한다. */
 const toSavedTemplate = (row: typeof pageTemplates.$inferSelect): SavedTemplate => ({
@@ -27,7 +22,7 @@ const toSavedTemplate = (row: typeof pageTemplates.$inferSelect): SavedTemplate 
 class DrizzleTemplateRepository implements ITemplateRepository {
   async createTemplate(input: CreateTemplateInput): Promise<SavedTemplate> {
     const id = randomUUID()
-    const [row] = await getDb()
+    const [row] = await getRequiredDb()
       .insert(pageTemplates)
       .values({
         id,
@@ -43,7 +38,7 @@ class DrizzleTemplateRepository implements ITemplateRepository {
   }
 
   async getTemplate(id: string): Promise<SavedTemplate | null> {
-    const [row] = await getDb()
+    const [row] = await getRequiredDb()
       .select()
       .from(pageTemplates)
       .where(eq(pageTemplates.id, id))
@@ -53,7 +48,7 @@ class DrizzleTemplateRepository implements ITemplateRepository {
   }
 
   async listTemplates(): Promise<SavedTemplate[]> {
-    const rows = await getDb()
+    const rows = await getRequiredDb()
       .select()
       .from(pageTemplates)
       .orderBy(asc(pageTemplates.name))
@@ -68,7 +63,7 @@ class DrizzleTemplateRepository implements ITemplateRepository {
     if (input.content !== undefined) values.content = input.content
     if (input.isDefault !== undefined) values.isDefault = input.isDefault
 
-    const [row] = await getDb()
+    const [row] = await getRequiredDb()
       .update(pageTemplates)
       .set(values)
       .where(eq(pageTemplates.id, id))
@@ -78,7 +73,7 @@ class DrizzleTemplateRepository implements ITemplateRepository {
   }
 
   async deleteTemplate(id: string): Promise<boolean> {
-    const result = await getDb()
+    const result = await getRequiredDb()
       .delete(pageTemplates)
       .where(eq(pageTemplates.id, id))
       .returning()
