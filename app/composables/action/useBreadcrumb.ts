@@ -1,44 +1,66 @@
-import { useFolderStore } from '~/composables/store/useFolderStore'
-
-/** 브레드크럼 항목. `to`가 없으면 현재 위치를 나타낸다. */
-interface BreadcrumbItem {
-  label: string
-  to?: string
+export interface BreadcrumbItem {
+  id: string
+  name: string
+  slug: string
+  path: string
+  type: 'home' | 'folder' | 'page'
 }
 
-/** 현재 라우트에 따라 브레드크럼 항목 목록을 계산한다. */
-export const useBreadcrumb = () => {
-  const route = useRoute()
-  const folderStore = useFolderStore()
+export interface FolderNode {
+  id: string
+  parentId: string | null
+  name: string
+  slug: string
+}
 
-  const items = computed<BreadcrumbItem[]>(() => {
-    const result: BreadcrumbItem[] = [{ label: '홈', to: '/' }]
-    const params = route.params
+/**
+ * 폴더 계층에서 브레드크럼 경로를 생성한다.
+ * 루트부터 현재 위치까지의 폴더 체인을 반환한다.
+ */
+export function buildBreadcrumb(
+  folders: FolderNode[],
+  currentFolderId: string,
+  pageTitle?: string
+): BreadcrumbItem[] {
+  const folderMap = new Map<string, FolderNode>()
+  for (const folder of folders) {
+    folderMap.set(folder.id, folder)
+  }
 
-    // 태그 라우트
-    if (route.path.startsWith('/tags')) {
-      result.push({ label: '태그', to: '/tags' })
-      if (params.id) {
-        result.push({ label: String(params.id) })
-      }
-      return result
-    }
+  const chain: FolderNode[] = []
+  let current = folderMap.get(currentFolderId)
+  while (current) {
+    chain.push(current)
+    current = current.parentId ? folderMap.get(current.parentId) : undefined
+  }
+  chain.reverse()
 
-    // 폴더 라우트
-    if (params.folderSlug) {
-      const folder = folderStore.folders.value.find(f => f.slug === params.folderSlug)
-      result.push({
-        label: folder?.name ?? String(params.folderSlug),
-        to: `/folders/${params.folderSlug}`
-      })
+  const result: BreadcrumbItem[] = [
+    { id: 'home', name: '홈', slug: '', path: '/', type: 'home' }
+  ]
 
-      if (params.pageSlug) {
-        result.push({ label: String(params.pageSlug) })
-      }
-    }
+  let cumulativePath = ''
+  for (const folder of chain) {
+    cumulativePath += `/${folder.slug}`
+    result.push({
+      id: folder.id,
+      name: folder.name,
+      slug: folder.slug,
+      path: cumulativePath,
+      type: 'folder'
+    })
+  }
 
-    return result
-  })
+  if (pageTitle !== undefined) {
+    const lastFolder = chain[chain.length - 1]
+    result.push({
+      id: 'page',
+      name: pageTitle,
+      slug: '',
+      path: cumulativePath,
+      type: 'page'
+    })
+  }
 
-  return { items }
+  return result
 }

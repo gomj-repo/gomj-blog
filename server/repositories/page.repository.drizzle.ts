@@ -22,6 +22,7 @@ const toSavedPage = (row: typeof pages.$inferSelect): SavedPage => ({
   content: row.content as Record<string, unknown> | null,
   plainText: row.plainText,
   isPublic: row.isPublic,
+  status: row.status,
   sortOrder: row.sortOrder,
   createdAt: row.createdAt.toISOString(),
   updatedAt: row.updatedAt.toISOString()
@@ -55,6 +56,7 @@ class DrizzlePageRepository implements IPageRepository {
         content,
         plainText: plainText || null,
         isPublic: input.isPublic ?? true,
+        status: input.status ?? 'published',
         sortOrder: input.sortOrder ?? 0
       })
       .returning()
@@ -123,6 +125,7 @@ class DrizzlePageRepository implements IPageRepository {
       values.plainText = extractPlainText(input.content as Record<string, unknown> | null) || null
     }
     if (input.isPublic !== undefined) values.isPublic = input.isPublic
+    if (input.status !== undefined) values.status = input.status
     if (input.sortOrder !== undefined) values.sortOrder = input.sortOrder
 
     const [row] = await getDb()

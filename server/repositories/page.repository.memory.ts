@@ -29,6 +29,7 @@ class InMemoryPageRepository implements IPageRepository {
       content,
       plainText: content ? extractPlainText(content) : null,
       isPublic: input.isPublic ?? true,
+      status: input.status ?? 'draft',
       sortOrder: input.sortOrder ?? 0,
       createdAt: now,
       updatedAt: now

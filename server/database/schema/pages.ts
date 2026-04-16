@@ -19,6 +19,8 @@ export const pages = pgTable('pages', {
   plainText: text('plain_text'),
   /** 공개 여부. `false`이면 관리자만 조회 가능. */
   isPublic: boolean('is_public').notNull().default(true),
+  /** 페이지 상태. draft(초안) / published(게시) / archived(보관). */
+  status: varchar('status', { length: 20 }).notNull().default('published'),
   /** 폴더 내 정렬 순서 */
   sortOrder: integer('sort_order').notNull().default(0),
   createdAt: timestamp('created_at').notNull().defaultNow(),

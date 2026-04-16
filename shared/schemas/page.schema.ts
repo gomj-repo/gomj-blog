@@ -9,6 +9,7 @@ export const createPageSchema = z.object({
   content: z.record(z.string(), z.any()).nullable().optional(),
   plainText: z.string().nullable().optional(),
   isPublic: z.boolean().default(true),
+  status: z.enum(['draft', 'published', 'archived']).default('draft'),
   sortOrder: z.number().int().default(0)
 })
 
@@ -21,6 +22,7 @@ export const updatePageSchema = z.object({
   content: z.record(z.string(), z.any()).nullable().optional(),
   plainText: z.string().nullable().optional(),
   isPublic: z.boolean().optional(),
+  status: z.enum(['draft', 'published', 'archived']).optional(),
   sortOrder: z.number().int().optional()
 })
 

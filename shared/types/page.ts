@@ -16,6 +16,8 @@ export interface SavedPage {
   plainText: string | null
   /** 공개 여부 */
   isPublic: boolean
+  /** 페이지 상태. draft / published / archived */
+  status: string
   /** 폴더 내 정렬 순서 */
   sortOrder: number
   createdAt: string
