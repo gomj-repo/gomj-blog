@@ -1,10 +1,6 @@
-export interface BreadcrumbItem {
-  id: string
-  name: string
-  slug: string
-  path: string
-  type: 'home' | 'folder' | 'page'
-}
+import type { BreadcrumbItem } from '@nuxt/ui'
+
+export type { BreadcrumbItem }
 
 export interface FolderNode {
   id: string
@@ -14,7 +10,7 @@ export interface FolderNode {
 }
 
 /**
- * 폴더 계층에서 브레드크럼 경로를 생성한다.
+ * 폴더 계층에서 NuxtUI UBreadcrumb에 전달할 아이템 배열을 생성한다.
  * 루트부터 현재 위치까지의 폴더 체인을 반환한다.
  */
 export function buildBreadcrumb(
@@ -36,29 +32,23 @@ export function buildBreadcrumb(
   chain.reverse()
 
   const result: BreadcrumbItem[] = [
-    { id: 'home', name: '홈', slug: '', path: '/', type: 'home' }
+    { label: '홈', icon: 'i-lucide-house', to: '/' }
   ]
 
   let cumulativePath = ''
   for (const folder of chain) {
     cumulativePath += `/${folder.slug}`
     result.push({
-      id: folder.id,
-      name: folder.name,
-      slug: folder.slug,
-      path: cumulativePath,
-      type: 'folder'
+      label: folder.name,
+      icon: 'i-lucide-folder',
+      to: cumulativePath
     })
   }
 
   if (pageTitle !== undefined) {
-    const lastFolder = chain[chain.length - 1]
     result.push({
-      id: 'page',
-      name: pageTitle,
-      slug: '',
-      path: cumulativePath,
-      type: 'page'
+      label: pageTitle,
+      icon: 'i-lucide-file-text'
     })
   }
 
