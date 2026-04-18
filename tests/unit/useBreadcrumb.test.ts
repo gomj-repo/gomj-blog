@@ -1,16 +1,10 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeEach } from 'vitest'
 import { buildBreadcrumb, collapseBreadcrumb } from '~/composables/action/useBreadcrumb'
-import type { SavedFolder } from '#shared/types/folder'
+import { makeFolder, resetFactoryCounters } from '../helpers/factories'
 
-const makeFolder = (overrides: Partial<SavedFolder> & { id: string; name: string; slug: string }): SavedFolder => ({
-  parentId: null,
-  sortOrder: 0,
-  createdAt: '2025-01-01T00:00:00Z',
-  updatedAt: '2025-01-01T00:00:00Z',
-  ...overrides
-})
+beforeEach(() => resetFactoryCounters())
 
-const folders: SavedFolder[] = [
+const folders = [
   makeFolder({ id: 'root', name: '개발', slug: 'dev' }),
   makeFolder({ id: 'be', parentId: 'root', name: '백엔드', slug: 'backend' }),
   makeFolder({ id: 'api', parentId: 'be', name: 'API 설계', slug: 'api-design' })
@@ -56,6 +50,16 @@ describe('buildBreadcrumb', () => {
       expect(item).not.toHaveProperty('to')
     }
   })
+
+  it('순환 참조가 있어도 무한 루프에 빠지지 않는다', () => {
+    const cyclic = [
+      makeFolder({ id: 'a', parentId: 'b', name: 'A', slug: 'a' }),
+      makeFolder({ id: 'b', parentId: 'a', name: 'B', slug: 'b' })
+    ]
+    const result = buildBreadcrumb(cyclic, 'a')
+    expect(result.length).toBeGreaterThanOrEqual(1)
+    expect(result.length).toBeLessThanOrEqual(4)
+  })
 })
 
 describe('collapseBreadcrumb', () => {
@@ -88,5 +92,9 @@ describe('collapseBreadcrumb', () => {
   it('항목이 1개면 축약하지 않는다', () => {
     const single = [{ label: '홈' }]
     expect(collapseBreadcrumb(single, 3)).toBe(single)
+  })
+
+  it('빈 배열이면 그대로 반환한다', () => {
+    expect(collapseBreadcrumb([], 3)).toEqual([])
   })
 })
