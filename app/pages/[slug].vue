@@ -6,12 +6,19 @@ import TextAlign from '@tiptap/extension-text-align'
 import Image from '@tiptap/extension-image'
 import Link from '@tiptap/extension-link'
 import Placeholder from '@tiptap/extension-placeholder'
+import { buildBreadcrumb } from '~/composables/action/useBreadcrumb'
 
 const route = useRoute()
 const slug = computed(() => route.params.slug as string)
 
 const pageApi = usePageApi()
 const { allPages, setAllPages, setCurrentPage } = usePageStore()
+const { folders } = useFolderStore()
+
+const breadcrumbItems = computed(() => {
+  if (!page.value) return []
+  return buildBreadcrumb(folders.value, page.value.folderId, page.value.title)
+})
 
 const page = computed(() => allPages.value.find(p => p.slug === slug.value) ?? null)
 
@@ -105,6 +112,8 @@ onUnmounted(() => {
 <template>
   <div class="editor-page">
     <div v-if="page" class="editor-page__container">
+      <BreadcrumbNav :items="breadcrumbItems" />
+
       <input
         v-if="isEditingTitle"
         ref="titleInputRef"
