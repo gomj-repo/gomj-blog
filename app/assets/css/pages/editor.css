@@ -88,8 +88,17 @@
   margin: 0.5em 0;
 }
 
+.editor-content :deep(.tiptap ol) {
+  color: var(--color-neutral-200, #e5e5e5);
+}
+
 .editor-content :deep(.tiptap li) {
   margin: 0.25em 0;
+  color: var(--color-neutral-200, #e5e5e5);
+}
+
+.editor-content :deep(.tiptap li::marker) {
+  color: var(--color-neutral-300, #d4d4d4);
 }
 
 .editor-content :deep(.tiptap blockquote) {
@@ -105,6 +114,7 @@
   padding: 1rem;
   margin: 0.5em 0;
   overflow-x: auto;
+  line-height: 1.4;
 }
 
 .editor-content :deep(.tiptap code) {
@@ -117,6 +127,7 @@
 .editor-content :deep(.tiptap pre code) {
   background: none;
   padding: 0;
+  line-height: 1.4;
 }
 
 .editor-content :deep(.tiptap hr) {

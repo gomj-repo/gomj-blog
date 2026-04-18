@@ -30,7 +30,10 @@ export const useAuthApi = () => {
 
   /** 로그아웃한다. */
   const logout = async () => {
-    await $fetch('/api/auth/sign-out', { method: 'POST' })
+    await $fetch('/api/auth/sign-out', {
+      method: 'POST',
+      headers: useRequestHeaders(['cookie'])
+    })
     store.setUser(null)
   }
 
