@@ -112,7 +112,10 @@ onUnmounted(() => {
 <template>
   <div class="editor-page">
     <div v-if="page" class="editor-page__container">
-      <BreadcrumbNav :items="breadcrumbItems" />
+      <div class="editor-page__toolbar">
+        <BreadcrumbNav :items="breadcrumbItems" />
+        <PageExportMenu :page-id="page.id" :slug="page.slug" />
+      </div>
 
       <input
         v-if="isEditingTitle"
