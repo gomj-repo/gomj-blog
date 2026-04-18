@@ -17,6 +17,10 @@
         :description="deleteTarget?.type === 'folder' ? '폴더와 모든 하위 항목이 삭제됩니다. 이 작업은 되돌릴 수 없습니다.' : '페이지가 영구적으로 삭제됩니다. 이 작업은 되돌릴 수 없습니다.'"
         @confirm="confirmDelete"
       />
+      <TemplatePickerDialog
+        v-model="showTemplatePicker"
+        @select="confirmTemplateSelect"
+      />
     </template>
 
     <template #footer="{ collapsed }">
@@ -66,6 +70,9 @@ const pageApi = usePageApi()
 const { folders } = useFolderStore()
 const { allPages, setAllPages } = usePageStore()
 
+const showTemplatePicker = ref(false)
+const pendingPageParentId = ref<string | null>(null)
+
 const handleAddNode = async (parentId: string | null, type: AddNodeType) => {
   if (type === 'folder') {
     await folderApi.createFolder({
@@ -75,19 +82,24 @@ const handleAddNode = async (parentId: string | null, type: AddNodeType) => {
       sortOrder: folders.value.length
     })
   } else {
-    const folderId = parentId ?? folders.value[0]?.id ?? ''
-    const page = await pageApi.createPage({
-      folderId,
-      parentPageId: null,
-      title: '새 페이지',
-      slug: `new-page-${Date.now()}`,
-      content: null,
-      isPublic: true,
-      sortOrder: allPages.value.length
-    })
-    await pageApi.fetchAllPages()
-    router.push('/' + page.slug)
+    pendingPageParentId.value = parentId
+    showTemplatePicker.value = true
   }
+}
+
+const confirmTemplateSelect = async (template: { content: Record<string, unknown> | null }) => {
+  const folderId = pendingPageParentId.value ?? folders.value[0]?.id ?? ''
+  const page = await pageApi.createPage({
+    folderId,
+    parentPageId: null,
+    title: '새 페이지',
+    slug: `new-page-${Date.now()}`,
+    content: template.content,
+    isPublic: true,
+    sortOrder: allPages.value.length
+  })
+  await pageApi.fetchAllPages()
+  router.push('/' + page.slug)
 }
 
 const handleRenameNode = async (id: string, name: string) => {
