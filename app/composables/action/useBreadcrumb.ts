@@ -1,5 +1,6 @@
 import type { BreadcrumbItem } from '@nuxt/ui'
 import type { SavedFolder } from '#shared/types/folder'
+import { buildFolderMap } from '~/composables/action/useFolderTree'
 
 export type { BreadcrumbItem }
 
@@ -12,14 +13,14 @@ export function buildBreadcrumb(
   currentFolderId: string,
   pageTitle?: string
 ): BreadcrumbItem[] {
-  const folderMap = new Map<string, SavedFolder>()
-  for (const folder of folders) {
-    folderMap.set(folder.id, folder)
-  }
+  const folderMap = buildFolderMap(folders)
 
   const chain: SavedFolder[] = []
+  const visited = new Set<string>()
   let current = folderMap.get(currentFolderId)
   while (current) {
+    if (visited.has(current.id)) break
+    visited.add(current.id)
     chain.push(current)
     current = current.parentId ? folderMap.get(current.parentId) : undefined
   }
@@ -55,8 +56,9 @@ export function collapseBreadcrumb(
   maxVisible: number = 3
 ): BreadcrumbItem[] {
   if (items.length <= maxVisible) return items
+  if (items.length === 0) return items
 
-  const home = items[0]
+  const home = items[0]!
   const tail = items.slice(-(maxVisible - 2))
 
   return [

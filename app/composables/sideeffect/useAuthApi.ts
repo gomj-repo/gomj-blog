@@ -2,12 +2,13 @@ import { useAuthStore } from '~/composables/store/useAuthStore'
 
 export const useAuthApi = () => {
   const store = useAuthStore()
+  const requestHeaders = useRequestHeaders(['cookie'])
 
   /** 현재 세션 정보를 서버에서 가져와 스토어에 반영한다. */
   const fetchSession = async () => {
     try {
       const data = await $fetch<{ user: { id: string; name: string; email: string } | null }>('/api/auth/get-session', {
-        headers: useRequestHeaders(['cookie'])
+        headers: requestHeaders
       })
       store.setUser(data?.user ?? null)
     } catch {
@@ -32,7 +33,7 @@ export const useAuthApi = () => {
   const logout = async () => {
     await $fetch('/api/auth/sign-out', {
       method: 'POST',
-      headers: useRequestHeaders(['cookie'])
+      headers: requestHeaders
     })
     store.setUser(null)
   }

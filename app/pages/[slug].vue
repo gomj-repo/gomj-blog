@@ -15,12 +15,12 @@ const pageApi = usePageApi()
 const { allPages, setAllPages, setCurrentPage } = usePageStore()
 const { folders } = useFolderStore()
 
+const page = computed(() => allPages.value.find(p => p.slug === slug.value) ?? null)
+
 const breadcrumbItems = computed(() => {
   if (!page.value) return []
   return buildBreadcrumb(folders.value, page.value.folderId, page.value.title)
 })
-
-const page = computed(() => allPages.value.find(p => p.slug === slug.value) ?? null)
 
 watch(page, (p) => {
   setCurrentPage(p)

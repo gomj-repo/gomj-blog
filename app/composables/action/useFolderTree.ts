@@ -5,6 +5,15 @@ export interface FolderTreeNode extends SavedFolder {
   children: FolderTreeNode[]
 }
 
+/** flat 배열에서 id → folder 맵을 생성한다. */
+export const buildFolderMap = (folders: SavedFolder[]): Map<string, SavedFolder> => {
+  const map = new Map<string, SavedFolder>()
+  for (const folder of folders) {
+    map.set(folder.id, folder)
+  }
+  return map
+}
+
 /** flat 배열을 트리 구조로 변환한다. */
 export const buildTree = (folders: SavedFolder[]): FolderTreeNode[] => {
   const map = new Map<string, FolderTreeNode>()
@@ -33,15 +42,15 @@ export const buildTree = (folders: SavedFolder[]): FolderTreeNode[] => {
 
 /** 특정 폴더의 조상 목록을 반환한다 (root -> ... -> parent 순서). */
 export const findAncestors = (id: string, folders: SavedFolder[]): SavedFolder[] => {
-  const map = new Map<string, SavedFolder>()
-  for (const folder of folders) {
-    map.set(folder.id, folder)
-  }
+  const map = buildFolderMap(folders)
 
   const ancestors: SavedFolder[] = []
+  const visited = new Set<string>()
   let current = map.get(id)
 
   while (current?.parentId) {
+    if (visited.has(current.parentId)) break
+    visited.add(current.parentId)
     const parent = map.get(current.parentId)
     if (!parent) break
     ancestors.unshift(parent)
