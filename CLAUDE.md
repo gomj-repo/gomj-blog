@@ -15,12 +15,7 @@ Confluence처럼 폴더(디렉터리)와 마크다운 페이지를 트리 구조
 - `app/assets/css/` : 전역 CSS, 디자인 토큰
 - `app/assets/images/` : 이미지 자산
 - `app/assets/icons/` : 아이콘 자산
-- `app/components/` : 페이지 단위 UI 컴포넌트
-- `app/components/<page>/` : 페이지별 독립 컴포넌트 패키지 (향후 마이그레이션 예정, 현재는 플랫 구조 `app/components/atoms/` 등 사용)
-- `app/components/<page>/atoms/` : 최소 단위 입력 컴포넌트
-- `app/components/<page>/molecules/` : atomic design 기준의 중간 단위 컴포넌트
-- `app/components/<page>/organizations/` : 조직 단위 컴포넌트
-- `app/components/<page>/templates/` : 페이지 조합 단위 컴포넌트
+- `app/components/` : UI 컴포넌트 (Nuxt UI v4 표준 플랫 구조, 서브디렉터리 없음)
 - `app/composables/` : 상태 관리, 독립 유틸, 부수효과 처리
 - `app/composables/action/` : 독립적인 유틸리티 기능 패키지
 - `app/composables/sideeffect/` : 외부 API 통신 등 부수 효과를 이해하기 쉽고 테스트 가능하게 관리하는 패키지
@@ -74,7 +69,7 @@ Confluence처럼 폴더(디렉터리)와 마크다운 페이지를 트리 구조
 - 도메인 타입과 입력 검증 스키마의 기준은 `shared/types/`, `shared/schemas/`에 둔다.
 - 외부 라이브러리인 `lib/`는 직접 수정하기보다 래핑과 조합으로 대응한다.
 - 문서를 수정할 때는 실제 디렉터리 구조와 서비스 목적이 일치해야 한다.
-- 디자인 토큰은 `primitive -> semantic -> feature CSS` 순서로 계층을 유지한다 (향후 마이그레이션 예정, 현재는 `variables.css` 단일 파일 사용).
+- 디자인 토큰은 `primitive.css -> semantic.css` 순서로 계층을 유지한다. 컴포넌트 스타일은 Tailwind 인라인 클래스를 사용한다.
 - primitive token은 값 자체만 두고, semantic token은 역할 이름으로 재매핑한다.
 - feature CSS(`components/**`, `pages/**`)에는 토큰 정의보다 실제 UI 규칙을 우선 둔다.
 
@@ -128,15 +123,13 @@ Confluence처럼 폴더(디렉터리)와 마크다운 페이지를 트리 구조
 
 ### CSS 토큰과 스타일 경계
 
-- raw value token은 `app/assets/css/base/primitive.css`에 둔다 (향후 마이그레이션 예정, 현재는 `variables.css` 사용).
-- semantic token은 `app/assets/css/base/semantic.css`에 두고, primitive token을 역할 이름으로 매핑한다 (향후 마이그레이션 예정).
-- 전역 CSS 엔트리는 `app/assets/css/base/main.css`이며, `primitive.css`, `semantic.css`, `components/common.css` 순서의 import를 기준으로 본다.
-- `app/assets/css/components/**`는 컴포넌트 단위 스타일만 둔다.
-- `app/assets/css/pages/**`는 페이지 조합 스타일만 둔다.
-- 숫자/색상/px 값을 컴포넌트 CSS에 직접 반복 선언하기보다 semantic token을 먼저 추가할 수 있는지 검토한다.
-- 동일한 버튼, 카드, 입력, 라벨 골격이 반���되면 공용 CSS 블록으로 통합하고, 개별 컴포넌트는 modifier 또는 CSS 변수 override 중심으로 유지한다.
-- 상태 표현은 `.active`, `.collapse` 같은 의미가 좁거나 값 중심인 이름보다 `.is-active`, `.is-collapsed` 같은 상태 이름과 semantic token 조합을 우선한다.
-- 경로 정리나 UI 변경 후 더 이상 쓰지 않는 class, CSS variable override, 구분선 pseudo-element 같은 잔재는 바로 제거한다.
+- raw value token은 `app/assets/css/base/primitive.css`에 둔다.
+- semantic token은 `app/assets/css/base/semantic.css`에 두고, primitive token을 역할 이름으로 매핑한다.
+- 전역 CSS 엔트리는 `app/assets/css/base/main.css`이며, `primitive.css`, `semantic.css`, `components/common.css` 순서로 import한다.
+- 컴포넌트와 페이지 스타일은 Tailwind 인라인 클래스로 작성한다 (외부 CSS 파일 없음).
+- TipTap 에디터 등 `:deep()` 규칙이 필요한 경우에만 `<style scoped>` 블록을 사용한다.
+- Nuxt UI 컴포넌트 커스터마이징은 `ui` prop 또는 Tailwind 클래스를 사용한다.
+- 상태 표현은 Vue의 `:class` 바인딩과 Tailwind 유틸리티 클래스 조합을 사용한다.
 
 ### 상태와 데이터 흐름
 
@@ -242,9 +235,9 @@ Confluence처럼 폴더(디렉터리)와 마크다운 페이지를 트리 구조
 
 | 변경 대상 | 위치 |
 |-----------|------|
-| 화면 조합 변경 | `app/pages/` 또는 `app/components/<page>/templates/` |
-| 재사용 UI 추가 | `app/components/<page>/molecules/`, `app/components/<page>/templates/` |
-| 외부 CSS 수정 | `app/assets/css/components/**`, `app/assets/css/pages/**` |
+| 화면 조합 변경 | `app/pages/` 또는 `app/components/` |
+| 재사용 UI 추가 | `app/components/` |
+| 컴포넌트 스타일 수정 | Tailwind 인라인 클래스 (외부 CSS 파일 없음) |
 | 토큰 수정 | `app/assets/css/base/primitive.css`, `app/assets/css/base/semantic.css` |
 | 순수 계산 로직 | `app/composables/action/` |
 | 외부 API, 브라우저 API | `app/composables/sideeffect/` |
@@ -257,7 +250,7 @@ Confluence처럼 폴더(디렉터리)와 마크다운 페이지를 트리 구조
 ### 프로젝트 구조 스킬
 - `project-architecture` : 블로그 프로젝트의 패키지 구조와 작업 규칙을 따르기 위한 프로젝트 전용 스킬
 - `project-composables` : `app/composables/action`, `app/composables/sideeffect`, `app/composables/store`의 책임 분리를 따르기 위한 프로젝트 전용 스킬
-- `project-components` : `app/components/<page>/molecules/`와 `app/components/<page>/templates/` 계층 기준으로 Toss Flat+Compound 원칙에 따라 UI 컴포넌트를 설계하고 구현하기 위한 프로젝트 전용 스킬
+- `project-components` : `app/components/` 플랫 구조 기준으로 Nuxt UI v4 표준 패턴에 따라 UI 컴포넌트를 설계하고 구현하기 위한 프로젝트 전용 스킬
 
 ### 범용 패턴 스킬
 - `create-api-service` : 외부 API 연동 시 원본 Response Class + 추상화 Local Response 분리, `service.requestBy{기준}()` 네이밍 규칙을 따르기 위한 스킬

@@ -1,10 +1,10 @@
 <template>
   <div>
     <div
-      class="tree-node"
+      class="group flex items-center cursor-pointer rounded-md select-none transition-colors duration-150 gap-1.5"
       :class="[
-        { 'is-active': isActive },
-        { 'is-collapsed': collapsed }
+        isActive ? 'bg-neutral-800' : 'hover:bg-neutral-800',
+        collapsed ? 'justify-center py-1.5 px-0 mx-1' : 'py-1 px-2 mx-2'
       ]"
       :style="collapsed ? {} : { paddingLeft: `${depth * 0.75 + 0.5}rem` }"
       @click="handleClick"
@@ -16,10 +16,10 @@
           color="neutral"
           size="xs"
           :icon="isOpen ? 'i-lucide-chevron-down' : 'i-lucide-chevron-right'"
-          class="tree-node__toggle"
+          class="flex-shrink-0 opacity-60 hover:opacity-100 hover:!bg-transparent"
           @click.stop="toggleOpen"
         />
-        <span v-else class="tree-node__spacer" />
+        <span v-else class="w-5 flex-shrink-0" />
       </template>
 
       <TreeNodeIcon :type="node.type" :open="isOpen" />
@@ -28,7 +28,7 @@
         v-if="!collapsed && isEditing"
         ref="nameInputRef"
         v-model="editName"
-        class="tree-node__name-input"
+        class="text-sm leading-5 text-inherit bg-transparent border border-neutral-600 rounded outline-none px-1 flex-1 min-w-0"
         @click.stop
         @keydown.enter="onEnter"
         @keydown.escape="cancelRename"
@@ -36,7 +36,7 @@
       />
       <span
         v-else-if="!collapsed"
-        class="tree-node__name"
+        class="text-sm leading-5 overflow-hidden text-ellipsis whitespace-nowrap flex-1 min-w-0"
         @click.stop="handleNameClick"
       >{{ node.name }}</span>
 
@@ -47,7 +47,7 @@
             color="neutral"
             size="xs"
             icon="i-lucide-plus"
-            class="tree-node__action-button"
+            class="flex-shrink-0 opacity-0 ml-auto pointer-events-none cursor-pointer transition-opacity duration-150 group-hover:opacity-60 group-hover:pointer-events-auto"
             aria-label="Add child"
             @click.stop
           />
@@ -58,7 +58,7 @@
             color="neutral"
             size="xs"
             icon="i-lucide-ellipsis"
-            class="tree-node__action-button"
+            class="flex-shrink-0 opacity-0 pointer-events-none cursor-pointer transition-opacity duration-150 group-hover:opacity-60 group-hover:pointer-events-auto"
             aria-label="Sort options"
             @click.stop
           />
@@ -71,7 +71,7 @@
             color="neutral"
             size="xs"
             icon="i-lucide-ellipsis"
-            class="tree-node__action-button"
+            class="flex-shrink-0 opacity-0 ml-auto pointer-events-none cursor-pointer transition-opacity duration-150 group-hover:opacity-60 group-hover:pointer-events-auto"
             aria-label="Page options"
             @click.stop
           />
@@ -99,7 +99,7 @@
 <script setup lang="ts">
 import type { DropdownMenuItem } from '@nuxt/ui'
 import type { SidebarTreeNode as SidebarTreeNodeType } from '~/composables/action/useSidebarTree'
-import type { AddNodeType } from '~/components/mocules/SidebarSearchInput.vue'
+import type { AddNodeType } from '~/components/SidebarSearchInput.vue'
 
 const props = defineProps<{
   node: SidebarTreeNodeType
@@ -218,5 +218,3 @@ const handleClick = () => {
   }
 }
 </script>
-
-<style scoped src="~/assets/css/components/molecules/SidebarTreeNode.css"></style>

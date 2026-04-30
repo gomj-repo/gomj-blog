@@ -1,23 +1,23 @@
 <template>
-  <div class="sidebar-nav-tree">
+  <div class="flex flex-col py-2">
     <!-- Home 고정 노드 -->
     <div
-      class="tree-node tree-node--home"
+      class="group flex items-center cursor-pointer gap-1.5 rounded-md select-none transition-colors duration-150 mb-1"
       :class="[
-        { 'is-active': activeSlug === '' },
-        { 'is-collapsed': collapsed }
+        activeSlug === '' ? 'bg-neutral-800' : 'hover:bg-neutral-800',
+        collapsed ? 'mx-1 px-0 py-1.5 justify-center' : 'mx-2 px-2 py-1.5'
       ]"
       @click="emit('navigate', '')"
     >
       <TreeNodeIcon type="home" />
-      <span v-if="!collapsed" class="tree-node__name">Home</span>
+      <span v-if="!collapsed" class="text-sm leading-5">Home</span>
       <UDropdownMenu v-if="!collapsed" :items="addRootItems">
         <UButton
           variant="ghost"
           color="neutral"
           size="xs"
           icon="i-lucide-plus"
-          class="tree-node__action-button"
+          class="flex-shrink-0 opacity-0 ml-auto pointer-events-none cursor-pointer transition-opacity duration-150 group-hover:opacity-60 group-hover:pointer-events-auto"
           aria-label="Add new item"
           @click.stop
         />
@@ -38,7 +38,7 @@
     />
     <div
       v-if="tree.length === 0 && !collapsed"
-      class="sidebar-nav-tree__empty"
+      class="px-4 py-3 text-xs text-center opacity-40"
     >
       No pages yet
     </div>
@@ -48,7 +48,7 @@
 <script setup lang="ts">
 import type { DropdownMenuItem } from '@nuxt/ui'
 import { buildSidebarTree } from '~/composables/action/useSidebarTree'
-import type { AddNodeType } from '~/components/mocules/SidebarSearchInput.vue'
+import type { AddNodeType } from '~/components/SidebarSearchInput.vue'
 
 defineProps<{
   collapsed?: boolean
@@ -81,5 +81,3 @@ const addRootItems: DropdownMenuItem[] = [
 const tree = computed(() => buildSidebarTree(folders.value, allPages.value))
 const activeSlug = computed(() => currentPage.value?.slug ?? '')
 </script>
-
-<style scoped src="~/assets/css/components/templates/SidebarNavTree.css"></style>

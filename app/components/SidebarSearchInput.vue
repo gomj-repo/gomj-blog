@@ -1,13 +1,12 @@
 <template>
-  <div class="sidebar-search">
+  <div class="flex flex-col gap-1 px-3 py-2">
     <template v-if="!collapsed">
       <UInput
         :model-value="modelValue"
         placeholder="Search..."
         size="sm"
         :leading-icon="'i-lucide-search'"
-        class="sidebar-search__field"
-        :ui="{ base: 'sidebar-search__input' }"
+        class="w-full"
         @update:model-value="emit('update:modelValue', $event)"
         @keydown.enter="emit('search', modelValue)"
       />
@@ -19,7 +18,7 @@
       color="neutral"
       size="sm"
       icon="i-lucide-search"
-      class="w-full justify-center sidebar-search__icon-button"
+      class="w-full justify-center"
       aria-label="Search"
       @click="emit('search', modelValue)"
     />
@@ -40,5 +39,3 @@ const emit = defineEmits<{
 }>()
 
 </script>
-
-<style scoped src="~/assets/css/components/molecules/SidebarSearchInput.css"></style>

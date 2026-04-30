@@ -29,10 +29,10 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div class="login-page">
-    <form class="login-form" @submit.prevent="handleSubmit">
-      <h1 class="login-form__title">GOMJ Wiki</h1>
-      <p class="login-form__subtitle">관리자 로그인</p>
+  <div class="flex items-center justify-center min-h-screen p-4">
+    <form class="flex flex-col gap-5 w-full max-w-[360px]" @submit.prevent="handleSubmit">
+      <h1 class="text-2xl font-bold text-center">GOMJ Wiki</h1>
+      <p class="text-sm text-center text-[var(--ui-text-muted)] -mt-3">관리자 로그인</p>
 
       <UFormField label="이메일">
         <UInput
@@ -41,7 +41,7 @@ const handleSubmit = async () => {
           placeholder="admin@gomj.dev"
           required
           autofocus
-          class="login-form__input"
+          class="w-full"
         />
       </UFormField>
 
@@ -51,22 +51,20 @@ const handleSubmit = async () => {
           type="password"
           placeholder="비밀번호를 입력하세요"
           required
-          class="login-form__input"
+          class="w-full"
         />
       </UFormField>
 
-      <p v-if="error" class="login-form__error">{{ error }}</p>
+      <p v-if="error" class="text-[0.8125rem] text-red-500 text-center">{{ error }}</p>
 
       <UButton
         type="submit"
         block
         :loading="loading"
-        class="login-form__submit"
+        class="mt-2"
       >
         로그인
       </UButton>
     </form>
   </div>
 </template>
-
-<style scoped src="~/assets/css/pages/login.css"></style>

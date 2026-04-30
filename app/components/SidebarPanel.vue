@@ -24,19 +24,19 @@
     </template>
 
     <template #footer="{ collapsed }">
-      <div class="sidebar-panel-footer">
+      <div class="flex items-center px-3 py-2">
         <UButton
           variant="ghost"
           color="neutral"
           size="xs"
           :icon="isDark ? 'i-lucide-sun' : 'i-lucide-moon'"
           :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
-          class="sidebar-panel-theme-toggle"
+          class="shrink-0 opacity-60 hover:opacity-100"
           @click="toggleColorMode"
         />
         <span
           v-if="!collapsed"
-          class="sidebar-panel-theme-label"
+          class="ml-2 text-xs text-neutral-400 opacity-40"
         >{{ currentMode }}</span>
       </div>
       <SidebarUserProfile :collapsed="collapsed" @logout="handleLogout" />
@@ -45,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import type { AddNodeType } from '~/components/mocules/SidebarSearchInput.vue'
+import type { AddNodeType } from '~/components/SidebarSearchInput.vue'
 
 defineProps<{
   title?: string
@@ -157,5 +157,3 @@ const handleLogout = async () => {
   router.push('/')
 }
 </script>
-
-<style scoped src="~/assets/css/components/templates/SidebarPanel.css"></style>

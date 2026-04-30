@@ -1,7 +1,0 @@
-.sidebar-toggle {
-  color: var(--sidebar-text);
-
-  &:hover {
-    background-color: var(--sidebar-item-hover);
-  }
-}

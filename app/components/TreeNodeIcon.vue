@@ -1,7 +1,7 @@
 <template>
   <UIcon
     :name="iconName"
-    class="tree-node-icon"
+    class="shrink-0 size-4 opacity-70"
   />
 </template>
 
@@ -21,5 +21,3 @@ const iconName = computed(() => {
   return 'i-lucide-file-text'
 })
 </script>
-
-<style scoped src="~/assets/css/components/molecules/TreeNodeIcon.css"></style>
