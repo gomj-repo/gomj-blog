@@ -21,7 +21,7 @@
     },
     "permissions": {
         "allow": [
-"Skill(update-config)",
+            "Skill(update-config)",
             "Read(//Users/kmj/.claude/**)",
             "Read(//Users/kmj/.claude/skills/**)",
             "Bash(find ~/.claude -name *.md -path */skills/*)",
@@ -36,7 +36,18 @@
             "WebFetch(domain:nuxt.com)",
             "WebFetch(domain:content.nuxt.com)",
             "Bash(grep:*)",
-            "Bash(bash \"/Users/kmj/.claude/plugins/marketplaces/omc//scripts/setup-progress.sh\" resume)"
+            "Bash(bash \"/Users/kmj/.claude/plugins/marketplaces/omc//scripts/setup-progress.sh\" resume)",
+            "Read(**)",
+            "Edit(**)",
+            "Write(**)"
+        ],
+        "deny": [
+            "mcp__*",
+            "Read(./.env)",
+            "Read(./.env.*)",
+            "Read(./secrets/**)",
+            "Edit(./.env)",
+            "Write(./.env)"
         ]
-    }
+      }
 }

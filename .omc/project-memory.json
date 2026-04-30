@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1776133190184,
+  "lastScanned": 1777536973808,
   "projectRoot": "/Users/kmj/WebstormProjects/gomj-blog",
   "techStack": {
     "languages": [
@@ -26,6 +26,11 @@
         "name": "nuxt",
         "version": "4.3.0",
         "category": "fullstack"
+      },
+      {
+        "name": "vitest",
+        "version": "4.1.4",
+        "category": "testing"
       }
     ],
     "packageManager": "pnpm",
@@ -58,7 +63,8 @@
     "workspaces": [],
     "mainDirectories": [
       "app",
-      "public"
+      "public",
+      "tests"
     ],
     "gitBranches": {
       "defaultBranch": "master",
@@ -71,7 +77,7 @@
       "path": "app",
       "purpose": "Application code",
       "fileCount": 2,
-      "lastAccessed": 1776133190177,
+      "lastAccessed": 1777536973742,
       "keyFiles": [
         "app.vue",
         "error.vue"
@@ -81,7 +87,7 @@
       "path": "public",
       "purpose": "Public files",
       "fileCount": 2,
-      "lastAccessed": 1776133190179,
+      "lastAccessed": 1777536973771,
       "keyFiles": [
         "favicon.ico",
         "robots.txt"
@@ -91,35 +97,42 @@
       "path": "server",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1776133190180,
+      "lastAccessed": 1777536973794,
       "keyFiles": []
     },
     "shared": {
       "path": "shared",
       "purpose": null,
       "fileCount": 0,
-      "lastAccessed": 1776133190180,
+      "lastAccessed": 1777536973800,
+      "keyFiles": []
+    },
+    "tests": {
+      "path": "tests",
+      "purpose": "Test files",
+      "fileCount": 0,
+      "lastAccessed": 1777536973800,
       "keyFiles": []
     },
     "app/assets": {
       "path": "app/assets",
       "purpose": "Static assets",
       "fileCount": 0,
-      "lastAccessed": 1776133190180,
+      "lastAccessed": 1777536973802,
       "keyFiles": []
     },
     "app/components": {
       "path": "app/components",
       "purpose": "UI components",
       "fileCount": 0,
-      "lastAccessed": 1776133190181,
+      "lastAccessed": 1777536973802,
       "keyFiles": []
     },
     "app/middleware": {
       "path": "app/middleware",
       "purpose": "Middleware",
       "fileCount": 1,
-      "lastAccessed": 1776133190181,
+      "lastAccessed": 1777536973802,
       "keyFiles": [
         "auth.ts"
       ]
@@ -128,7 +141,7 @@
       "path": "app/pages",
       "purpose": "Page components",
       "fileCount": 3,
-      "lastAccessed": 1776133190181,
+      "lastAccessed": 1777536973803,
       "keyFiles": [
         "[slug].vue",
         "index.vue",
@@ -139,90 +152,120 @@
       "path": "server/api",
       "purpose": "API routes",
       "fileCount": 0,
-      "lastAccessed": 1776133190181,
+      "lastAccessed": 1777536973803,
       "keyFiles": []
     },
     "server/utils": {
       "path": "server/utils",
       "purpose": "Utility functions",
-      "fileCount": 5,
-      "lastAccessed": 1776133190182,
+      "fileCount": 9,
+      "lastAccessed": 1777536973803,
       "keyFiles": [
         "auth.ts",
         "db.ts",
-        "session.ts"
+        "markdown.ts"
       ]
     },
     "shared/schemas": {
       "path": "shared/schemas",
       "purpose": "Schema definitions",
-      "fileCount": 4,
-      "lastAccessed": 1776133190182,
+      "fileCount": 8,
+      "lastAccessed": 1777536973804,
       "keyFiles": [
-        "folder.schema.ts",
-        "index.ts",
-        "page.schema.ts"
+        "bookmark.schema.ts",
+        "comment.schema.ts",
+        "folder.schema.ts"
       ]
     },
     "shared/types": {
       "path": "shared/types",
       "purpose": "Type definitions",
-      "fileCount": 6,
-      "lastAccessed": 1776133190182,
+      "fileCount": 10,
+      "lastAccessed": 1777536973806,
       "keyFiles": [
-        "folder.ts",
-        "index.ts",
-        "page.ts"
+        "bookmark.ts",
+        "comment.ts",
+        "folder.ts"
+      ]
+    },
+    "shared/utils": {
+      "path": "shared/utils",
+      "purpose": "Utility functions",
+      "fileCount": 1,
+      "lastAccessed": 1777536973807,
+      "keyFiles": [
+        "tiptap.ts"
+      ]
+    },
+    "tests/helpers": {
+      "path": "tests/helpers",
+      "purpose": "Helper functions",
+      "fileCount": 1,
+      "lastAccessed": 1777536973808,
+      "keyFiles": [
+        "factories.ts"
       ]
     }
   },
   "hotPaths": [
     {
+      "path": "",
+      "accessCount": 55,
+      "lastAccessed": 1776507837631,
+      "type": "directory"
+    },
+    {
       "path": "app/components/mocules/SidebarTreeNode.vue",
-      "accessCount": 43,
-      "lastAccessed": 1776169997185,
+      "accessCount": 44,
+      "lastAccessed": 1777537089323,
       "type": "file"
     },
     {
       "path": "app/components/templates/SidebarPanel.vue",
-      "accessCount": 36,
-      "lastAccessed": 1776169997017,
+      "accessCount": 41,
+      "lastAccessed": 1777537077026,
       "type": "file"
     },
     {
-      "path": "",
-      "accessCount": 35,
-      "lastAccessed": 1776169731291,
-      "type": "directory"
+      "path": "app/components/templates/SidebarNavTree.vue",
+      "accessCount": 27,
+      "lastAccessed": 1777537077503,
+      "type": "file"
     },
     {
-      "path": "app/components/templates/SidebarNavTree.vue",
-      "accessCount": 26,
-      "lastAccessed": 1776169971629,
+      "path": "app/pages/[slug].vue",
+      "accessCount": 22,
+      "lastAccessed": 1777537865490,
       "type": "file"
     },
     {
       "path": "app/components/mocules/SidebarSearchInput.vue",
-      "accessCount": 20,
-      "lastAccessed": 1775996095938,
-      "type": "file"
-    },
-    {
-      "path": "app/layouts/default.vue",
-      "accessCount": 12,
-      "lastAccessed": 1775994479181,
+      "accessCount": 21,
+      "lastAccessed": 1777537090335,
       "type": "file"
     },
     {
       "path": "app/composables/action/useSidebarTree.ts",
-      "accessCount": 12,
-      "lastAccessed": 1776169897897,
+      "accessCount": 14,
+      "lastAccessed": 1776505310024,
+      "type": "file"
+    },
+    {
+      "path": "app/layouts/default.vue",
+      "accessCount": 14,
+      "lastAccessed": 1777537070853,
       "type": "file"
     },
     {
       "path": "app/assets/css/base/main.css",
-      "accessCount": 10,
-      "lastAccessed": 1775991422764,
+      "accessCount": 12,
+      "lastAccessed": 1777537967651,
+      "type": "file"
+    },
+    {
+      "path": "app/assets/css/pages/editor.css",
+      "accessCount": 11,
+      "lastAccessed": 1777537828950,
       "type": "file"
     },
     {
@@ -233,38 +276,74 @@
     },
     {
       "path": "nuxt.config.ts",
+      "accessCount": 9,
+      "lastAccessed": 1776503399887,
+      "type": "file"
+    },
+    {
+      "path": "app/composables/action/useFolderTree.ts",
       "accessCount": 8,
-      "lastAccessed": 1776084932078,
+      "lastAccessed": 1776505247967,
+      "type": "file"
+    },
+    {
+      "path": "shared/types/page.ts",
+      "accessCount": 8,
+      "lastAccessed": 1776506451536,
       "type": "file"
     },
     {
       "path": "app/components/atoms/SidebarLogo.vue",
-      "accessCount": 7,
-      "lastAccessed": 1775991121246,
+      "accessCount": 8,
+      "lastAccessed": 1777537091204,
       "type": "file"
     },
     {
       "path": "app/components/atoms/TreeNodeIcon.vue",
-      "accessCount": 7,
-      "lastAccessed": 1775991494225,
+      "accessCount": 8,
+      "lastAccessed": 1777537092647,
       "type": "file"
     },
     {
-      "path": "app/pages/[slug].vue",
+      "path": "app/composables/store/useFolderStore.ts",
       "accessCount": 7,
-      "lastAccessed": 1775996616949,
+      "lastAccessed": 1776504284645,
       "type": "file"
     },
     {
-      "path": "app/components/atoms/SidebarToggleButton.vue",
-      "accessCount": 5,
-      "lastAccessed": 1775991126588,
+      "path": "shared/types/folder.ts",
+      "accessCount": 7,
+      "lastAccessed": 1776505237932,
+      "type": "file"
+    },
+    {
+      "path": "app/composables/sideeffect/usePageApi.ts",
+      "accessCount": 6,
+      "lastAccessed": 1776507816110,
+      "type": "file"
+    },
+    {
+      "path": "app/composables/store/usePageStore.ts",
+      "accessCount": 6,
+      "lastAccessed": 1776508147914,
       "type": "file"
     },
     {
       "path": "app/components/mocules/SidebarUserProfile.vue",
-      "accessCount": 5,
-      "lastAccessed": 1775991142577,
+      "accessCount": 6,
+      "lastAccessed": 1777537090771,
+      "type": "file"
+    },
+    {
+      "path": "app/components/atoms/SidebarToggleButton.vue",
+      "accessCount": 6,
+      "lastAccessed": 1777537093365,
+      "type": "file"
+    },
+    {
+      "path": "app/pages/index.vue",
+      "accessCount": 6,
+      "lastAccessed": 1777537877844,
       "type": "file"
     },
     {
@@ -275,14 +354,44 @@
     },
     {
       "path": "app/composables/store/useAuthStore.ts",
-      "accessCount": 4,
-      "lastAccessed": 1775987414847,
+      "accessCount": 5,
+      "lastAccessed": 1776501609011,
       "type": "file"
     },
     {
-      "path": "app/composables/store/useFolderStore.ts",
+      "path": "package.json",
+      "accessCount": 5,
+      "lastAccessed": 1776506717166,
+      "type": "file"
+    },
+    {
+      "path": "server/api/pages/[id].patch.ts",
       "accessCount": 4,
-      "lastAccessed": 1775994249375,
+      "lastAccessed": 1776501585860,
+      "type": "file"
+    },
+    {
+      "path": "app/composables",
+      "accessCount": 4,
+      "lastAccessed": 1776502397162,
+      "type": "directory"
+    },
+    {
+      "path": "server/repositories/page.repository.ts",
+      "accessCount": 4,
+      "lastAccessed": 1776506451799,
+      "type": "file"
+    },
+    {
+      "path": "server/api/pages/index.post.ts",
+      "accessCount": 4,
+      "lastAccessed": 1776507850129,
+      "type": "file"
+    },
+    {
+      "path": "app/assets/css/base/primitive.css",
+      "accessCount": 4,
+      "lastAccessed": 1777537595709,
       "type": "file"
     },
     {
@@ -292,39 +401,9 @@
       "type": "file"
     },
     {
-      "path": "app/assets/css/base/primitive.css",
-      "accessCount": 3,
-      "lastAccessed": 1775991429661,
-      "type": "file"
-    },
-    {
       "path": "app/assets/css/components/templates/SidebarNavTree.css",
       "accessCount": 3,
       "lastAccessed": 1775991540125,
-      "type": "file"
-    },
-    {
-      "path": "app/composables/store/usePageStore.ts",
-      "accessCount": 3,
-      "lastAccessed": 1775994248890,
-      "type": "file"
-    },
-    {
-      "path": "app/pages/index.vue",
-      "accessCount": 3,
-      "lastAccessed": 1775994259047,
-      "type": "file"
-    },
-    {
-      "path": "shared/types/page.ts",
-      "accessCount": 3,
-      "lastAccessed": 1775994423480,
-      "type": "file"
-    },
-    {
-      "path": "app/assets/css/pages/editor.css",
-      "accessCount": 3,
-      "lastAccessed": 1775996215230,
       "type": "file"
     },
     {
@@ -334,21 +413,21 @@
       "type": "file"
     },
     {
-      "path": "app/composables/sideeffect/usePageApi.ts",
-      "accessCount": 3,
-      "lastAccessed": 1776169711616,
-      "type": "file"
-    },
-    {
-      "path": "shared/types/folder.ts",
-      "accessCount": 3,
-      "lastAccessed": 1776169722374,
-      "type": "file"
-    },
-    {
       "path": "app/app.vue",
-      "accessCount": 2,
-      "lastAccessed": 1775987376982,
+      "accessCount": 3,
+      "lastAccessed": 1777537050998,
+      "type": "file"
+    },
+    {
+      "path": "app/assets/css/components/common.css",
+      "accessCount": 3,
+      "lastAccessed": 1777537595573,
+      "type": "file"
+    },
+    {
+      "path": "app/assets/css/base/semantic.css",
+      "accessCount": 3,
+      "lastAccessed": 1777537596121,
       "type": "file"
     },
     {
@@ -358,57 +437,27 @@
       "type": "file"
     },
     {
-      "path": "app/assets/css/base/semantic.css",
+      "path": "app/middleware/auth.ts",
       "accessCount": 2,
-      "lastAccessed": 1775991429252,
+      "lastAccessed": 1776501593229,
       "type": "file"
     },
     {
-      "path": "app/assets/css/components/common.css",
+      "path": "shared/types/index.ts",
       "accessCount": 2,
-      "lastAccessed": 1775991448658,
+      "lastAccessed": 1776505237380,
       "type": "file"
     },
     {
-      "path": "app/composables",
+      "path": "shared/types/user.ts",
       "accessCount": 2,
-      "lastAccessed": 1775994423961,
-      "type": "directory"
-    },
-    {
-      "path": "package.json",
-      "accessCount": 1,
-      "lastAccessed": 1775987088504,
+      "lastAccessed": 1776505244185,
       "type": "file"
     },
     {
       "path": "app/error.vue",
       "accessCount": 1,
       "lastAccessed": 1775987103554,
-      "type": "file"
-    },
-    {
-      "path": "app/middleware/auth.ts",
-      "accessCount": 1,
-      "lastAccessed": 1775987103718,
-      "type": "file"
-    },
-    {
-      "path": "shared/types/index.ts",
-      "accessCount": 1,
-      "lastAccessed": 1775987114192,
-      "type": "file"
-    },
-    {
-      "path": "app/composables/action/useFolderTree.ts",
-      "accessCount": 1,
-      "lastAccessed": 1775987154192,
-      "type": "file"
-    },
-    {
-      "path": "shared/types/user.ts",
-      "accessCount": 1,
-      "lastAccessed": 1775987200917,
       "type": "file"
     },
     {
@@ -454,27 +503,9 @@
       "type": "directory"
     },
     {
-      "path": "server/repositories/page.repository.ts",
-      "accessCount": 1,
-      "lastAccessed": 1775996533266,
-      "type": "file"
-    },
-    {
       "path": "server/repositories/page.repository.memory.ts",
       "accessCount": 1,
       "lastAccessed": 1775996533921,
-      "type": "file"
-    },
-    {
-      "path": "server/api/pages/index.post.ts",
-      "accessCount": 1,
-      "lastAccessed": 1775996548413,
-      "type": "file"
-    },
-    {
-      "path": "server/api/pages/[id].patch.ts",
-      "accessCount": 1,
-      "lastAccessed": 1775996548793,
       "type": "file"
     }
   ],
